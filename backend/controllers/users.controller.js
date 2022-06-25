@@ -49,6 +49,7 @@ module.exports = {
 
         }
         catch (err) {
+            console.log(req.body)
             console.log(err)
             res.status(400).json(err)
         }
@@ -60,9 +61,9 @@ module.exports = {
     },
 
     getUser: (req, res) => {
-        User.findOneUser({ _id: req.params.id })
+        User.findOne({ _id: req.params.id })
             .then(user => res.json(user))
-            .catch(err => res.json(err))
+            .catch(err => res.status(404).json(err))
     },
 
     getAllUsers: (req, res) => {
@@ -72,7 +73,7 @@ module.exports = {
     },
 
     updateUser: (req, res) => {
-        User.findOneAndUpdate = ({ _id: req.params.id }, req.body, { new: true })
+        User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
             .then(updateUser => res.json(updateUser))
             .catch(err => res.json(err))
     },
