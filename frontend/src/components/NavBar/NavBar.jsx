@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Logout from '../Logout/Logout'
 import './NavBar.css'
 
@@ -10,10 +11,10 @@ const NavBar = () => {
         <input type="text" placeholder='Search' />
       </div>
       <div className='flex align-center'>
-        <a className='no-border' href="/">Home</a>
-        <a href="/allposts">All Posts</a>
-        <a href="/create">Create a Post</a>
-        <a href="/account">Account</a>
+        <Link to="/" className='no-border' >Home</Link>
+        <Link to="/allposts" >All Posts</Link>
+        <Link to="/create" >Create a Post</Link>
+        <Link to="/account" >Account</Link>
         <Logout />
       </div>
     </div>
