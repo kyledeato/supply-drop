@@ -25,7 +25,8 @@ let PostSchema = new Schema({
     },
 
     image: {
-        type: String
+        type: String,
+        default: undefined
     },
 
     location: {
@@ -33,8 +34,10 @@ let PostSchema = new Schema({
         required: [true, "A postal code is required"]
     },
 
-    user: {
-        type: String
+    postedBy: {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "You need to logged in to create a post"]
     }
 }, { timeseries: true });
 
