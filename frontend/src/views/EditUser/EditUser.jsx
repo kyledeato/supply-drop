@@ -2,15 +2,15 @@ import React from "react";
 
 import UserForm from "../../components/UserForm/UserForm";
 
-const Login = (props) => {
+const EditUser = (props) => {
     return (
         <div>
             <header>
-                <h1>Login</h1>
+                <h1>Edit User Info</h1>
             </header>
-            <UserForm mode={"login"} />
+            <UserForm mode={"edit"} />
         </div>
     );
 };
 
-export default Login;
+export default EditUser;
