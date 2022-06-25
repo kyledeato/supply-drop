@@ -1,0 +1,59 @@
+.flex{
+    display: flex;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.nav{
+    background-color: #96ccec;
+    padding: 15px 25px;
+    justify-content: space-between;
+    color: #0b343d;
+    /* position: fixed;
+    top: 0; left: 0; right: 0; */
+    /* background-image: linear-gradient(to bottom right, #96ccec, #e3ec96); */
+}
+
+.nav h1{
+    font-size: 2.2em;
+    margin-right: 10px;
+    font-weight: 600;
+    cursor: default;
+}
+
+.nav button{
+    margin-left: 25px;
+}
+
+.nav a {
+    font-size: 1.2em;
+    color: #0b343d;
+    text-decoration: none;
+    padding: 0 10px;
+    border-left: 2px solid #7ea9c2;
+}
+
+.nav a:hover{
+    text-decoration: underline;
+}
+
+.no-border{
+    border: none !important;
+}
+
+.nav input[type=text]{
+    border-radius: 50px;
+    height: min-content;
+    padding: 5px 10px;
+    border: 2px solid #0b343d;
+}
+
+.nav input[type=text]:focus{
+    outline: none;
+}
+
+.title-search{
+    flex: 1;
+}
