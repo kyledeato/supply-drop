@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bycrpt')
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 let UserSchema = new Schema({
-    _id: Schema.Types.ObjectId,
 
     firstName: {
         type: String,
@@ -14,12 +13,6 @@ let UserSchema = new Schema({
         type: String,
         required: [true, "Last name is required"],
         minlength: [2, "Last name must be longer then 1 character"]
-    },
-
-    username: {
-        type: String,
-        required: [true, "A username is required"],
-        minlength: [2, "Username must be longer the 1 character"]
     },
 
     email: {
@@ -44,4 +37,4 @@ UserSchema.pre('save', function (next) {
         });
 })
 
-module.exports.User = mongoose.mongo('User', UserSchema);
+module.exports.User = mongoose.model('User', UserSchema);
