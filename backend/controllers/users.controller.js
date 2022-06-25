@@ -39,7 +39,7 @@ module.exports = {
                     const userToken = jwt.sign({
                         id: user._id
                     }, process.env.SECRET_KEY);
-                    res.cookie("usertoken", userToken, precess.env.SECRET_KEY, {
+                    res.cookie("usertoken", userToken, process.env.SECRET_KEY, {
                         httpOnly: true
                     })
                         .json({ msg: "success!", user: user });
@@ -48,6 +48,7 @@ module.exports = {
 
         }
         catch (err) {
+            console.log(req.body)
             console.log(err)
             res.status(400).json(err)
         }

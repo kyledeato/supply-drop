@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bycrpt')
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 let UserSchema = new Schema({
-    _id: Schema.Types.ObjectId,
 
     firstName: {
         type: String,
@@ -44,4 +43,4 @@ UserSchema.pre('save', function (next) {
         });
 })
 
-module.exports.User = mongoose.mongo('User', UserSchema);
+module.exports.User = mongoose.model('User', UserSchema);

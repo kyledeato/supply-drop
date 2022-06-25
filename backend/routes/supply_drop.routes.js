@@ -4,7 +4,7 @@ const { authenticate } = require('../configs/jwt.config');
 
 module.exports = function (app) {
 	//User routes
-	app.post('/api/user/registe', UserController.register)
+	app.post('/api/user/register', UserController.register)
 	app.post('/api/user/login', UserController.login)
 	app.post('/api/user/logout', UserController.logout)
 	app.get('/api/user', UserController.getAllUsers)
