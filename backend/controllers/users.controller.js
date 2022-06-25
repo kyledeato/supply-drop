@@ -5,7 +5,7 @@ console.log(User);
 
 module.exports = {
     login: async (req, res) => {
-        const user = await User.findOneUser({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.email });
 
         if (user === null) {
             return res.sendStatus(400);
@@ -45,7 +45,7 @@ module.exports = {
                     })
                         .json({ msg: "success!", user: user });
                 })
-            res.json(newuser)
+            res.json(user)
 
         }
         catch (err) {
@@ -56,7 +56,7 @@ module.exports = {
     },
 
     logout: (req, res) => {
-        res.clearCooke('usertoken');
+        res.clearCookie('usertoken');
         res.sendStatus(200);
     },
 
@@ -87,7 +87,7 @@ module.exports = {
     getLoggedUser: (req, res) => {
         const userToken = res.locals.payload;
         console.log(userToken)
-        User.findOneUser({ _id: userToken.id })
+        User.findOne({ _id: userToken.id })
             .then(loggedUser => {
                 res.json(loggedUser)
             })
