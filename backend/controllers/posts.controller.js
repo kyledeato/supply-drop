@@ -3,8 +3,10 @@ const { Post } = require('../models/post.model');
 module.exports = {
     createPost: async (req, res) => {
         try {
+            console.log('here')
             let post = req.body
-            if (post.offer == true && post.image == undefined) {
+            console.log(post)
+            if (post.offering == true && post.image != '') {
                 throw new Error("Post must contain an image")
             }
             const newpost = await Post.create(post)
@@ -17,7 +19,7 @@ module.exports = {
     },
 
     getPost: (req, res) => {
-        Post.findOnePost({ _id: req.params.id })
+        Post.findOne({ _id: req.params.id })
             .then(post => res.json(post))
             .catch(err => res.json(err))
     },
@@ -29,13 +31,13 @@ module.exports = {
     },
 
     updatePost: (req, res) => {
-        Post.findOneAndUpdate = ({ _id: req.params.id }, req.body, { new: true })
+        Post.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
             .then(updatePost => res.json(updatePost))
             .catch(err => res.json(err))
     },
 
     deletePost: (req, res) => {
-        User.deleteOne({ _id: req.params.id })
+        Post.deleteOne({ _id: req.params.id })
             .then(deleteConfirmation => res.json(deleteConfirmation))
             .catch(err => res.json(err))
     }

@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 let PostSchema = new Schema({
-    _id: Schema.Types.ObjectId,
 
     looking: {
-        type: Boolean
+        type: Boolean,
     },
 
     offering: {
-        type: Boolean
+        type: Boolean,
     },
 
     title: {
@@ -26,7 +25,7 @@ let PostSchema = new Schema({
 
     image: {
         type: String,
-        default: undefined
+        default: null
     },
 
     location: {
@@ -35,10 +34,10 @@ let PostSchema = new Schema({
     },
 
     postedBy: {
-        type: Mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
         required: [true, "You need to logged in to create a post"]
     }
 }, { timeseries: true });
 
-module.exports.User = mongoose.model('Post', PostSchema);
+module.exports.Post = mongoose.model('Post', PostSchema);
