@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from "axios";
 import { Link } from 'react-router-dom'
 import Logout from '../Logout/Logout'
 import './NavBar.css'
 const NavBar = () => {
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/auth`, { withCredentials: true })
+            .then(res => {
+                setUser(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
   return (
     <div className='header-container display-flex'>
       <div className='logo-container display-flex'>

@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 const { User } = require('../models/user.model');
 const bcrypt = require('bcrypt');
 console.log(User);
@@ -11,47 +11,50 @@ module.exports = {
             return res.sendStatus(400);
         }
 
-        const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        const correctPassword = await bcrypt.compare(
+            req.body.password,
+            user.password
+        );
 
         if (!correctPassword) {
             return res.sendStatus(400);
         }
 
-        const userToken = jwt.sign({
-            id: user._id
-        }, process.env.SECRET_KEY);
+        const userToken = jwt.sign(
+            {
+                id: user._id,
+            },
+            process.env.SECRET_KEY
+        );
 
-        res
-            .cookie("usertoken", userToken, process.env.SECRET_KEY, {
-                httpOnly: true
-            })
-            .json({ msg: "success!" });
+        res.cookie('usertoken', userToken, process.env.SECRET_KEY, {
+            httpOnly: true,
+        }).json({ msg: 'success!' });
     },
 
     register: async (req, res) => {
         try {
-            let user = req.body
+            let user = req.body;
             if (user.password != user.confirmPassword) {
-                throw new Error("Passwords don't match")
+                throw new Error("Passwords don't match");
             }
-            const newuser = await User.create(user)
-                .then(user => {
-                    console.log("HERE")
-                    const userToken = jwt.sign({
-                        id: user._id
-                    }, process.env.SECRET_KEY);
-                    res.cookie("usertoken", userToken, process.env.SECRET_KEY, {
-                        httpOnly: true
-                    })
-                        .json({ msg: "success!", user: user });
-                })
-            res.json(user)
-
-        }
-        catch (err) {
-            console.log(req.body)
-            console.log(err)
-            res.status(400).json(err)
+            const newuser = await User.create(user).then((user) => {
+                console.log('HERE');
+                const userToken = jwt.sign(
+                    {
+                        id: user._id,
+                    },
+                    process.env.SECRET_KEY
+                );
+                res.cookie('usertoken', userToken, process.env.SECRET_KEY, {
+                    httpOnly: true,
+                });
+                res.json(user);
+            });
+        } catch (err) {
+            console.log(req.body);
+            console.log(err);
+            res.status(400).json(err);
         }
     },
 
@@ -62,41 +65,41 @@ module.exports = {
 
     getUser: (req, res) => {
         User.findOne({ _id: req.params.id })
-            .then(user => res.json(user))
-            .catch(err => res.status(404).json(err))
+            .then((user) => res.json(user))
+            .catch((err) => res.status(404).json(err));
     },
 
     getAllUsers: (req, res) => {
         User.find({})
-            .then(user => res.json(user))
-            .catch(err => res.json(err))
+            .then((user) => res.json(user))
+            .catch((err) => res.json(err));
     },
 
     updateUser: (req, res) => {
         User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-            .then(updateUser => res.json(updateUser))
-            .catch(err => res.json(err))
+            .then((updateUser) => res.json(updateUser))
+            .catch((err) => res.json(err));
     },
 
     deleteUser: (req, res) => {
         User.deleteOne({ _id: req.params.id })
-            .then(deleteConfirmation => res.json(deleteConfirmation))
-            .catch(err => res.json(err))
+            .then((deleteConfirmation) => res.json(deleteConfirmation))
+            .catch((err) => res.json(err));
     },
 
     getLoggedUser: (req, res) => {
         const userToken = res.locals.payload;
-        console.log(userToken)
+        console.log(userToken);
         User.findOne({ _id: userToken.id })
-            .then(loggedUser => {
-                res.json(loggedUser)
+            .then((loggedUser) => {
+                res.json(loggedUser);
             })
-            .catch(err => res.json(err))
-    }
-}
+            .catch((err) => res.json(err));
+    },
+};
 
 module.exports.index = (req, res) => {
     res.json({
-        message: "Forum Board"
-    })
+        message: 'Forum Board',
+    });
 };

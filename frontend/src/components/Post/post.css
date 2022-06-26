@@ -1,0 +1,18 @@
+.post-container,
+.post-form-container {
+    position: fixed;
+    display: flex;
+    z-index: 9002;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.post,
+.post-form {
+    display: inline-block;
+    outline: 2px red solid;
+}
