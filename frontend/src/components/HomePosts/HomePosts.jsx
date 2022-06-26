@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-
+import './HomePosts.css'
 import Post from "../Post/Post";
 import PostForm from "../PostForm";
+import editLogo from './edit.png';
+import trashLogo from "./trash.png";
+import locationLogo from "./location.png";
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
@@ -59,14 +62,36 @@ const HomePosts = () => {
         <div>
             {posts.map((post, index) => (
                 <React.Fragment key={post._id}>
-                    <div>
-                        <div
+                    <div >
+                        <div class="post-contain"
                             onClick={() => {
                                 console.log("\nparent");
                                 embiggenComponent(index, true, "post");
                             }}
                         >
                             <div>
+                                <div >
+                                    <div className="post-header">
+                                        <h5 className="title">{post.title}</h5>
+                                        <div >
+                                          <img onClick={() => {
+                                    // navigate(`/edit/post/${post._id}`)
+                                    editRef.current = true;
+                                    embiggenComponent(index, true, "edit");
+                                }} src={editLogo} alt="" srcset="" className="edit-trash"/>
+                                          <img src={trashLogo} alt="" srcset="" className="edit-trash" onClick={() => {
+                                    handleDelete(post._id);
+                                }}/>
+                                    </div>
+                                    </div>
+                                    <div className="location-container">
+                                      <img src={locationLogo} alt="" className="locationImage"/>
+                                      <p className="location">{post.location}</p>
+                                    </div>
+                                </div>
+                                <div className="description">{post.description}</div>
+                            </div>
+                            <div className="display-flex-center">
                                 {post.image ? (
                                     <img
                                         src={
@@ -79,33 +104,8 @@ const HomePosts = () => {
                                     <span>no image</span>
                                 )}
                             </div>
-                            <div>
-                                <div>
-                                    <span>{post.title}</span> ::{" "}
-                                    <span>{post.location}</span>
-                                </div>
-                                <div>{post.description}</div>
-                            </div>
                         </div>
 
-                        <div>
-                            <button
-                                onClick={() => {
-                                    // navigate(`/edit/post/${post._id}`)
-                                    editRef.current = true;
-                                    embiggenComponent(index, true, "edit");
-                                }}
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => {
-                                    handleDelete(post._id);
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </div>
                     </div>
                     {post.bigEdit && (
                         <PostForm

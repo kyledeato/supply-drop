@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './Home.css'
 import { Link } from 'react-router-dom';
 import PostForm from '../../components/PostForm';
 import HomePosts from '../../components/HomePosts/HomePosts';
@@ -59,7 +59,9 @@ const Home = () => {
                     userID={user._id}
                 />
             )}
+            <div className='display-flex-center'>
             <HomePosts />
+            </div>
             {user ? (
                 <div className="logged">
                     <p>
