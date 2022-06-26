@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom'
 import Logout from '../Logout/Logout'
-
+import './NavBar.css'
 const NavBar = () => {
     const [user, setUser] = useState()
 
@@ -26,6 +26,7 @@ const NavBar = () => {
     }
 
   return (
+    
     <div className='nav flex align-center'>
         <div className='flex align-center'>
             <h1>Supply Drop</h1>
