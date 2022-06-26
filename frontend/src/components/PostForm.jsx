@@ -1,10 +1,9 @@
-import React from 'react'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {useParams, Link, useNavigate} from "react-router-dom";
 
 const PostForm = (props) => {
-  const {postID} = useParams();
+  const {postID, userID} = useParams();
   const [postInfo, setPostInfo] = useState();
   const [postTitle, setPostTitle] = useState();
   const [postDesc, setPostDesc] = useState();
@@ -13,16 +12,24 @@ const PostForm = (props) => {
   const [postImage, setPostImage] = useState('test')
   const [errors, setErrors] = useState();
 
-  // async function getPostInfo(){
-  //   try{
-  //     const resposne = await axios.get(`http://locatlhost:8000/api/post/${postId}`, {withCredentials: true});
-  //     setPostInfo(res.data)
-  //   } 
+  async function getPostInfo(){
+    try{
+      const response = await axios.get(`http://locatlhost:8000/api/post/${postID}`, {withCredentials: true});
+      setPostInfo({
+        'postID' : response.data._id,
+        'title' : response.data.title,
+        'description' : response.data.description,
+        'postType' : response.data.postType,
+        'location' : response.data.location,
+        'image' : response.data.image,
+        'postedBy' : response.data.postedBy
+      })
+    } 
     
-  //   catch(err) {
-  //     console.log(err)
-  //   }
-  // }
+    catch(err) {
+      console.log(err)
+    }
+  }
 
   // function handlePhoto(){
 
@@ -34,9 +41,10 @@ const PostForm = (props) => {
     const postData = {
       'title' : postTitle,
       'desc' : postDesc,
-      'requestoffer' : postType,
+      'postType' : postType,
       'location' : postLocation,
-      'image' : postImage
+      'image' : postImage,
+      'postedBy' : userID
     };
 
     axios.post(`http://localhost:8000/api/post/new`, {postData}, {withCredentials: true})
@@ -50,49 +58,67 @@ const PostForm = (props) => {
     });
   }
 
-  // useEffect( () => {
-  //   if (postID){
-  //     getPostInfo()
-  //   }
-  // })
+  useEffect( () => {
+    if (postID){
+      getPostInfo()
+    }
+  }, [])
 
   return (
     <div>
       <form className='flex' action={submitHandler} method='post'>
+        
+        <input />
         {/* image container */}
         <div>
           <label className='' htmlFor='postPicture'>Add a photo</label>
-          <input type={'file'} accept='.png, .jpg, .jpeg' name='postPicture' onChange={handlePhoto} />
+          <input type={'file'} accept='.png, .jpg, .jpeg' name='postPicture'  />
         </div>
         {/* end post container */}
 
         {/* post information container */}
         <div>
           <label htmlFor="title">Post Title:</label>
-          <input type={'text'} name='title' className='' onChange={(e) => setPostTitle(e.target.value)}/>
+          <input type={'text'} name='title' className='' onChange={(e) => setPostTitle(e.target.value)} value={postID.title} />
 
-          <label className='' htmlFor='requestoffer'>What type of post is it?</label>
-            {/* radio button options */}
-            <div>
-              {/* request radio option */}
-              <div className='flex'>
-                <label className='' htmlFor='requestoffer'>Request</label>
-                <input type={'radio'} name='requestoffer' value={true} onChange={(e) => setPostType(e.target.value)}/>
+          <label className=''>What type of post is it?</label>
+          {/* radio button conditionals */}
+          { 
+            postType == 'offering'
+            ? 
+              <div>
+
+                <div className='flex'>
+                  <label className='' htmlFor='looking'>Request</label>
+                  <input type={'radio'} name='looking' value='looking' onChange={(e) => setPostType(e.target.value)}/>
+                </div>
+
+
+                <div className='flex'>
+                  <label className='' htmlFor='offering'>Offer</label>
+                  <input selected type={'radio'} name='offering' value='offering'onChange={(e) => setPostType(e.target.value)}/>
+                </div>
+
               </div>
+            : 
+              <div>
+                <div className='flex'>
+                  <label className='' htmlFor='looking'>Request</label>
+                  <input selected type={'radio'} name='looking' value='looking' onChange={(e) => setPostType(e.target.value)}/>
+                </div>
 
-              {/* offer radio option */}
-              <div className='flex'>
-                <label className='' htmlFor='requestoffer'>Offer</label>
-                <input type={'radio'} name='requestoffer' value={false}  onChange={(e) => setPostType(e.target.value)}/>
+                <div className='flex'>
+                  <label className='' htmlFor='offering'>Offer</label>
+                  <input type={'radio'} name='offering' value='offering'onChange={(e) => setPostType(e.target.value)}/>
+                </div>
               </div>
-            {/* end radio button options */}
-            </div>
-
+          }
+          
           <label className='' htmlFor='desc'>Description of item(s)</label>
-          <textarea className='' name='' draggable='false' rows={'16'} cols={'50'} value={''} onChange={(e) => setPostDesc(e.target.value)}/>
+          <textarea className='' name='' draggable='false' rows={'16'} cols={'50'} value={postID.description} onChange={(e) => setPostDesc(e.target.value)}/>
 
           <label className='' htmlFor='location'>Location of item</label>
-          <input type={'text'} className='' name='location' value={''} onChange={(e) => setPostLocation(e.target.value)}/>
+          <input type={'text'} className='' name='location' value={postID.location} onChange={(e) => setPostLocation(e.target.value)}/>
 
           <button type='submit' className='' >Submit</button>
         </div>
