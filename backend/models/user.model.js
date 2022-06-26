@@ -15,6 +15,12 @@ let UserSchema = new Schema({
         minlength: [2, "Last name must be longer then 1 character"]
     },
 
+    username: {
+        type: String,
+        required: [true, "You must have a username"],
+        minlength: [2, "Username must be 2 characters or longer"]
+    },
+
     email: {
         type: String,
         required: [true, "Email is required"],
