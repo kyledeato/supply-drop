@@ -8,6 +8,7 @@ import Account from './views/Account/Account';
 import View from './views/View/View';
 import AllPost from './views/AllPost/AllPost';
 import Logout from './components/Logout/Logout';
+import EditPost from './components/UpdatePosts/UpdatePosts';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
 
           {/* IF YOU ARE DOING VIEWS PLZ CHANGE -> will be /view/id or the name of the post or not*/}
           <Route path="/view" element={<View/>}></Route>
-          
+          <Route path="/edit/post/:id" element={<EditPost/>}></Route>
           
         </Routes>
 

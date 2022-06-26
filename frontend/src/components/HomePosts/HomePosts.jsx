@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HomePosts = () => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/post/")
@@ -14,6 +16,13 @@ const HomePosts = () => {
         console.log(err);
       });
   }, []);
+  const handleDelete = (postID) => {
+    axios.delete(`http://localhost:8000/api/post/${postID}`, {withCredentials:true})
+      .then((res) => {
+        console.log(res.data, "Delete Successful");
+      })
+      .catch((err) => console.log(err, "error deleting"))
+  }
   return (
     <div>
       {posts.map((post) => (
@@ -33,6 +42,10 @@ const HomePosts = () => {
               <span>{post.title}</span> :: <span>{post.location}</span>
             </div>
             <div>{post.description}</div>
+          </div>
+          <div> 
+            <button onClick={() => navigate(`/edit/post/${post._id}`)}>Edit</button>
+            <button onClick={handleDelete}>Delete</button>
           </div>
         </div>
       ))}
