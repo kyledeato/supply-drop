@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useParams, Link, useNavigate} from "react-router-dom";
 
 const PostForm = (props) => {
-  const {postID, userID} = useParams();
+  const {postID, userID, isEdit} = useParams();
   const [postTitle, setPostTitle] = useState('');
   const [postDesc, setPostDesc] = useState('');
   const [postType, setPostType] = useState('');
@@ -69,7 +69,7 @@ const PostForm = (props) => {
         {/* image container */}
         <div>
           <label className='' htmlFor='postPicture'>Add a photo</label>
-          <input type={'file'} accept='.png, .jpg, .jpeg' name='postPicture'  value={postImage}/>
+          <input type={'file'} accept='.png, .jpg, .jpeg' name='postPicture'/>
         </div>
         {/* end post container */}
 
