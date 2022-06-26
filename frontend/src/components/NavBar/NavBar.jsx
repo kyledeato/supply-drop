@@ -14,19 +14,38 @@ const NavBar = () => {
             .catch(err => console.log(err))
     }, [])
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios.post("http://localhost:8000/api/user/logout", {}, { withCredentials: true })
+            .then(res => {
+                setUser(null)
+                navigate('/')
+            })
+            .catch(err => console.log(err))
+    }
+
   return (
-    <div className='header-container display-flex'>
-      <div className='logo-container display-flex'>
-        <h1>Supply Drop</h1>
-        <input type="text" placeholder='Search' />
-      </div>
-      <div className='links-container display-flex'>
-        <Link to="/" className='links'>Home</Link>
-        <Link to="/allposts" className='links'>All Posts</Link>
-        <Link to="/create" className='links'>Create a Post</Link>
-        <Link to="/account" className='links'>Account</Link>
-        <Logout />
-      </div>
+    
+    <div className='nav flex align-center'>
+        <div className='flex align-center'>
+            <h1>Supply Drop</h1>
+            <input type="text" placeholder='Search' />
+        </div>
+        <div className='flex align-center'>
+            <Link to="/" className='no-border' >Home</Link>
+            <Link to="/allposts" >All Posts</Link>
+            <Link to="/create" >Create a Post</Link>
+            {user && <Link to={`/account/${user._id}`}>Account</Link>}
+            {user ? <div className="logged">
+                <button onClick={handleSubmit}>Logout</button>
+                <p>
+                    Signed in as: {user.firstName} {user.lastName}
+                </p>
+            </div>
+                  :
+                 <Link to="/login">Login</Link>}
+        </div>
     </div>
   )
 }

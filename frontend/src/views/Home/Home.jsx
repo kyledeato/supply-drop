@@ -12,21 +12,6 @@ const Home = () => {
     const [bigForm, setBigForm] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        axios
-            .post(
-                'http://localhost:8000/api/user/logout',
-                {},
-                { withCredentials: true }
-            )
-            .then((res) => {
-                setUser(null);
-                navigate('/');
-            })
-            .catch((err) => console.log(err));
-    };
     useEffect(() => {
         axios
             .get(`http://localhost:8000/api/auth`, { withCredentials: true })
@@ -63,16 +48,6 @@ const Home = () => {
             <div className="display-flex-center">
                 <HomePosts />
             </div>
-            {/* add a new one for recent */}
-            
-            {user ? <div className="logged">
-                <p>
-                    Signed in as: {user.firstName} {user.lastName} {user._id}
-                </p>
-                <button onClick={handleSubmit}>Logout</button>
-            </div>
-            :
-            <Link to="/login">Login</Link>}
         </div>
     );
 };
