@@ -59,18 +59,20 @@ const Home = () => {
                     userID={user._id}
                 />
             )}
-            <HomePosts />
-            {user ? (
-                <div className="logged">
-                    <p>
-                        Signed in as: {user.firstName} {user.lastName}{' '}
-                        {user._id}
-                    </p>
-                    <button onClick={handleSubmit}>Logout</button>
-                </div>
-            ) : (
-                <Link to="/login">Login</Link>
-            )}
+            
+            <div className="display-flex-center">
+                <HomePosts />
+            </div>
+            {/* add a new one for recent */}
+            
+            {user ? <div className="logged">
+                <p>
+                    Signed in as: {user.firstName} {user.lastName} {user._id}
+                </p>
+                <button onClick={handleSubmit}>Logout</button>
+            </div>
+            :
+            <Link to="/login">Login</Link>}
         </div>
     );
 };
