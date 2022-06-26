@@ -37,7 +37,12 @@ const Home = () => {
             {
                 user&&<PostForm userID={user._id}/>
             }
-            <HomePosts />
+            
+            <div className="display-flex-center">
+                <HomePosts />
+            </div>
+            {/* add a new one for recent */}
+            
             {user ? <div className="logged">
                 <p>
                     Signed in as: {user.firstName} {user.lastName} {user._id}

@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Homepost.css'
+import locationLogo from './location.png'
+import editLogo from './edit.png'
+import trashLogo from './trash.png'
 
 const HomePosts = () => {
   const [posts, setPosts] = useState([]);
@@ -24,12 +28,24 @@ const HomePosts = () => {
       .catch((err) => console.log(err, "error deleting"))
   }
   return (
-    <div>
+    <div >
       {posts.map((post) => (
-        <div key={post._id}>
-          <div>
+        <div key={post._id} className="post-container">
+          <div className="post-header">
+            <div>
+              <h5 className="title">{post.title}</h5>  
+              <div className="location-container"> 
+                <img src={locationLogo} alt="" srcset="" className="locationImage"/>
+                <p className="location">
+                {post.location}</p>
+              </div>
+            </div>
+              
+            <div className="description">{post.description}</div>
+          </div>
+          <div className="display-flex-center">
             {post.image ? (
-              <img
+              <img className="image"
                 src={"http://localhost:8000/img/" + post.image}
                 alt={post.title}
               />
@@ -37,15 +53,11 @@ const HomePosts = () => {
               <span>no image</span>
             )}
           </div>
-          <div>
-            <div>
-              <span>{post.title}</span> :: <span>{post.location}</span>
-            </div>
-            <div>{post.description}</div>
-          </div>
-          <div> 
-            <button onClick={() => navigate(`/edit/post/${post._id}`)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+          <div className="edit-delete-container"> 
+            <img src={editLogo} alt="" srcset="" className="edit-trash" onClick={() => navigate(`/edit/post/${post._id}`)}/>
+            <img src={trashLogo} alt="" srcset="" onClick={handleDelete} className="edit-trash"/>
+            {/* <button onClick={() => navigate(`/edit/post/${post._id}`)}>Edit</button> */}
+            {/* <button onClick={handleDelete}>Delete</button> */}
           </div>
         </div>
       ))}

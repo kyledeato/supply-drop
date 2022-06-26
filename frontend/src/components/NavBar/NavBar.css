@@ -1,0 +1,20 @@
+.header-container {
+    background-color: #53a2beff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.links {
+    text-decoration:none;
+    color: black;
+}
+
+.links-container {
+    justify-content: space-around;
+}
+
+.display-flex {
+    display: flex;
+}
