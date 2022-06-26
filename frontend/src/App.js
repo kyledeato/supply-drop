@@ -7,6 +7,7 @@ import Home from './views/Home/Home';
 import Account from './views/Account/Account';
 import View from './views/View/View';
 import AllPost from './views/AllPost/AllPost';
+import Create from './views/Create/Create';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/register" element={<Register/>}></Route>
           <Route path="/" element={<Home/>}></Route>
-          <Route path="/create" element={<Home/>}></Route>
+          <Route path="/create" element={<Create/>}></Route>
           <Route path="/allposts" element={<AllPost/>}></Route>
           
 
