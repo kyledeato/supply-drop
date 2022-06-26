@@ -1,14 +1,13 @@
 import axios from 'axios';
-
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Homepost.css';
-import locationLogo from './location.png';
-import editLogo from './edit.png';
-import trashLogo from './trash.png';
-
+import './HomePosts.css';
 import Post from '../Post/Post';
 import PostForm from '../PostForm';
+import editLogo from './edit.png';
+import trashLogo from './trash.png';
+import locationLogo from './location.png';
+import { useNavigate } from 'react-router-dom';
+import './Homepost.css';
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
