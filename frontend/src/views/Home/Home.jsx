@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from 'react-router-dom'
-import CreateAPost from '../../components/CreateAPost/CreateAPost'
+import CreateAPost from '../../components/PostForm'
 import HomePosts from '../../components/HomePosts/HomePosts'
 import Logout from '../../components/Logout/Logout'
 import NavBar from '../../components/NavBar/NavBar'
