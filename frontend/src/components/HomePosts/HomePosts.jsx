@@ -1,11 +1,13 @@
-import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
-import './HomePosts.css'
-import Post from "../Post/Post";
-import PostForm from "../PostForm";
+import axios from 'axios';
+import React, { useEffect, useState, useRef } from 'react';
+import './HomePosts.css';
+import Post from '../Post/Post';
+import PostForm from '../PostForm';
 import editLogo from './edit.png';
-import trashLogo from "./trash.png";
-import locationLogo from "./location.png";
+import trashLogo from './trash.png';
+import locationLogo from './location.png';
+import { useNavigate } from 'react-router-dom';
+import './Homepost.css';
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
@@ -17,7 +19,7 @@ const HomePosts = () => {
 
     const updatePosts = () => {
         axios
-            .get("http://localhost:8000/api/post/")
+            .get('http://localhost:8000/api/post/')
             .then((res) => {
                 let data = res.data;
 
@@ -41,19 +43,19 @@ const HomePosts = () => {
             .then((res) => {
                 updatePosts();
             })
-            .catch((err) => console.log(err, "error deleting"));
+            .catch((err) => console.log(err, 'error deleting'));
     };
 
     const embiggenComponent = (postIndex, active, bigType) => {
         let tempPosts = [...posts];
-        console.log("EMBIGGEN!", postIndex, tempPosts[postIndex]);
+        console.log('EMBIGGEN!', postIndex, tempPosts[postIndex]);
 
-        if (bigType === "post") {
+        if (bigType === 'post') {
             tempPosts[postIndex].bigPost = active;
         } else {
             tempPosts[postIndex].bigEdit = active;
         }
-        console.log("EMBIGGEN!", tempPosts);
+        console.log('EMBIGGEN!', tempPosts);
 
         setPosts(tempPosts);
     };
@@ -62,50 +64,60 @@ const HomePosts = () => {
         <div>
             {posts.map((post, index) => (
                 <React.Fragment key={post._id}>
-                    <div >
-                        <div class="post-contain"
-                            onClick={() => {
-                                console.log("\nparent");
-                                embiggenComponent(index, true, "post");
-                            }}
-                        >
-                            <div>
-                                <div >
-                                    <div className="post-header">
-                                        <h5 className="title">{post.title}</h5>
-                                        <div >
-                                          <img onClick={() => {
-                                    // navigate(`/edit/post/${post._id}`)
-                                    editRef.current = true;
-                                    embiggenComponent(index, true, "edit");
-                                }} src={editLogo} alt="" srcset="" className="edit-trash"/>
-                                          <img src={trashLogo} alt="" srcset="" className="edit-trash" onClick={() => {
-                                    handleDelete(post._id);
-                                }}/>
-                                    </div>
-                                    </div>
-                                    <div className="location-container">
-                                      <img src={locationLogo} alt="" className="locationImage"/>
-                                      <p className="location">{post.location}</p>
-                                    </div>
-                                </div>
-                                <div className="description">{post.description}</div>
-                            </div>
-                            <div className="display-flex-center">
-                                {post.image ? (
-                                    <img
-                                        src={
-                                            "http://localhost:8000/img/" +
-                                            post.image
-                                        }
-                                        alt={post.title}
-                                    />
-                                ) : (
-                                    <span>no image</span>
-                                )}
+                    <div
+                        className="post-header"
+                        onClick={() => {
+                            console.log('\nparent');
+                            embiggenComponent(index, true, 'post');
+                        }}
+                    >
+                        <div>
+                            <h5 className="title">{post.title}</h5>
+                            <div className="location-container">
+                                <img
+                                    src={locationLogo}
+                                    alt=""
+                                    srcset=""
+                                    className="locationImage"
+                                />
+                                <p className="location">{post.location}</p>
                             </div>
                         </div>
 
+                        <div className="description">{post.description}</div>
+                    </div>
+                    ;
+                    <div className="display-flex-center">
+                        {post.image ? (
+                            <img
+                                src={'http://localhost:8000/img/' + post.image}
+                                alt={post.title}
+                            />
+                        ) : (
+                            <span>no image</span>
+                        )}
+                    </div>
+                    <div className="edit-delete-container">
+                        <img
+                            src={editLogo}
+                            alt=""
+                            srcset=""
+                            className="edit-trash"
+                            onClick={() => {
+                                // navigate(`/edit/post/${post._id}`)
+                                editRef.current = true;
+                                embiggenComponent(index, true, 'edit');
+                            }}
+                        />
+                        <img
+                            src={trashLogo}
+                            alt=""
+                            srcset=""
+                            onClick={() => {
+                                handleDelete(post._id);
+                            }}
+                            className="edit-trash"
+                        />
                     </div>
                     {post.bigEdit && (
                         <PostForm
