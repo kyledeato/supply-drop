@@ -1,6 +1,6 @@
 import React from "react";
 
-import UserForm from "../../components/UserForm/UserForm";
+import UserLogin from "../../components/LoginForm/UserLogin";
 
 const Login = (props) => {
     return (
@@ -8,7 +8,7 @@ const Login = (props) => {
             <header>
                 <h1>Login</h1>
             </header>
-            <UserForm mode={"login"} />
+            <UserLogin/>
         </div>
     );
 };

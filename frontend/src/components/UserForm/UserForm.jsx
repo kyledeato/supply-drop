@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function UserForm({ mode }) {
-<<<<<<< Updated upstream
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({});
@@ -31,106 +30,6 @@ function UserForm({ mode }) {
 
       default:
         return;
-=======
-    const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        console.log({ mode });
-        switch (mode) {
-            case "login":
-                break;
-            case "registration":
-                break;
-            case "edit":
-                axios
-                    .get("/api/auth", {
-                        withCredentials: true,
-                    })
-                    .then((res) => {
-                        setUser(res.data);
-                        console.log(res.data);
-                    })
-                    .catch((err) => console.log(err));
-
-                break;
-
-            default:
-                return;
-        }
-    }, []);
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const inputs = e.currentTarget.querySelectorAll("input");
-        let url;
-        let data = new URLSearchParams();
-
-        inputs.forEach((input) => {
-            data.append(input.name, input.value);
-        });
-
-        switch (mode) {
-            case "login":
-                url = "http://localhost:8000/api/user/login";
-
-                axios
-                    .post(url, data)
-                    .then((res) => {
-                        navigate("/");
-                    })
-                    .catch((err) => {
-                        const errResData = err.response.data.errors;
-                        let errArr = {};
-
-                        for (const key in errResData) {
-                            errArr[key] = errResData[key]["message"];
-                        }
-                        setErrors(errArr);
-                    });
-                break;
-            case "register":
-                url = "/api/user/register";
-
-                axios
-                    .post(url, data)
-                    .then((res) => {
-                        navigate("/");
-                    })
-                    .catch((err) => {
-                        const errResData = err.response.data.errors;
-                        let errArr = {};
-
-                        for (const key in errResData) {
-                            errArr[key] = errResData[key]["message"];
-                        }
-                        setErrors(errArr);
-                    });
-                break;
-            case "edit":
-                url = `/api/user/${user._id}`;
-
-                axios
-                    .put(url, data)
-                    .then((res) => {
-                        navigate("/");
-                    })
-                    .catch((err) => {
-                        const errResData = err.response.data.errors;
-                        let errArr = {};
-
-                        for (const key in errResData) {
-                            errArr[key] = errResData[key]["message"];
-                        }
-                        setErrors(errArr);
-                    });
-
-                break;
-            default:
-                break;
-        }
->>>>>>> Stashed changes
     }
   }, []);
 
