@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from 'react-router-dom'
-import CreateAPost from '../../components/PostForm'
+import PostForm from '../../components/PostForm'
 import HomePosts from '../../components/HomePosts/HomePosts'
 import Logout from '../../components/Logout/Logout'
 import NavBar from '../../components/NavBar/NavBar'
 
 const Home = () => {
     const [user, setUser] = useState()
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,21 +30,24 @@ const Home = () => {
             .catch(err => console.log(err))
     }, [])
 
-  return (
-    <div>
-        <NavBar/>
-        <h1>HOMEPAGE</h1>
-        <CreateAPost/>
-          <HomePosts />
-          {user ? <div className="logged">
-              <p>
-                  Signed in as: {user.firstName} {user.lastName}
-              </p>
-              <button onClick={handleSubmit}>Logout</button>
-          </div> :
-              <Link to="/login">Login</Link>}
-    </div>
-  )
+    return (
+        <div>
+            <NavBar/>
+            <h1>HOMEPAGE</h1>
+            {
+                user&&<PostForm userID={user._id}/>
+            }
+            <HomePosts />
+            {user ? <div className="logged">
+                <p>
+                    Signed in as: {user.firstName} {user.lastName} {user._id}
+                </p>
+                <button onClick={handleSubmit}>Logout</button>
+            </div>
+            :
+            <Link to="/login">Login</Link>}
+        </div>
+    )
 }
 
 export default Home
