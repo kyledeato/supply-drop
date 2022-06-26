@@ -1,131 +1,163 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import {useParams, Link, useNavigate} from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const PostForm = (props) => {
   const { userID, postID } = props;
-  const [postTitle, setPostTitle] = useState('');
-  const [postDesc, setPostDesc] = useState('');
-  const [postType, setPostType] = useState('');
-  const [postLocation, setPostLocation] = useState('');
-  const [postImage, setPostImage] = useState('test')
-  const [errors, setErrors] = useState('');
+  const [postInfo, setPostInfo] = useState({});
+  const [errors, setErrors] = useState("");
 
-  async function getPostInfo(){
-    try{
-      const response = await axios.get(`http://locatlhost:8000/api/post/${postID}`, {withCredentials: true});
-      postID = response.data._id;
-      setPostTitle(response.data.title);
-      setPostDesc(response.data.description);
-      setPostType(response.data.postType);
-      setPostLocation(response.data.location)
-      setPostImage(response.data.image)
-      var postedBy = response.data.postedBy
-    } 
-    
-    catch(err) {
-      console.log(err)
+  async function getPostInfo() {
+    try {
+      const response = await axios.get(
+        `http://locatlhost:8000/api/post/${postID}`,
+        { withCredentials: true }
+      );
+      setPostInfo(response.data);
+    } catch (err) {
+      console.log(err);
     }
   }
 
-  // function handlePhoto(){
-
-  // }
-
-  function submitHandler(e){
+  function submitHandler(e) {
     e.preventDefault();
+    const inputs = e.currentTarget.querySelectorAll("input,textarea");
+    let data = new FormData();
 
-    const postData = {
-      'title' : postTitle,
-      'description' : postDesc,
-      'postType' : postType,
-      'location' : postLocation,
-      'image' : postImage,
-      'postedBy' : userID
-    };
+    inputs.forEach((input) => {
+      if (input.name === "") {
+        return;
+      }
 
-    axios.post(`http://localhost:8000/api/post/new`, postData, {withCredentials: true})
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(`err is: ${err}`);
-        setErrors(err.response.data.errors);
-        return errors
+      if (input.type === "file") {
+        const fileList = input.files;
+        if (fileList[0]) {
+          data.append(input.name, fileList[0]);
+        }
+      } else if (input.type === "radio") {
+        if (input.checked) {
+          data.append(input.name, input.value);
+        }
+      } else {
+        if (input.value) {
+          data.append(input.name, input.value);
+        }
+      }
     });
+
+    data.append("postedBy", userID);
+
+    axios
+      .post(`http://localhost:8000/api/post/new`, data, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response.data.errors);
+        setErrors(err.response.data.errors);
+        return errors;
+      });
   }
 
-  useEffect( () => {
-    if (postID){
-      getPostInfo()
+  useEffect(() => {
+    if (postID) {
+      getPostInfo();
     }
-  }, [])
+  }, []);
 
   return (
     <div>
-      <form className='flex' onSubmit={submitHandler} method='post'>
-        
+      <form className="flex" onSubmit={submitHandler} method="post">
         <input />
         {/* image container */}
         <div>
-          <label className='' htmlFor='postPicture'>Add a photo</label>
-          <input type={'file'} accept='.png, .jpg, .jpeg' name='postPicture'/>
+          <label className="" htmlFor="photo">
+            Add a photo
+          </label>
+          <input type={"file"} accept=".png, .jpg, .jpeg" name="photo" />
         </div>
         {/* end post container */}
 
         {/* post information container */}
         <div>
           <label htmlFor="title">Post Title:</label>
-          <input type={'text'} name='title' className='' onChange={(e) => setPostTitle(e.target.value)} value={postTitle} />
+          <input
+            type={"text"}
+            name="title"
+            className=""
+            // onChange={(e) => setPostTitle(e.target.value)}
+            defaultValue={postInfo.title || ""}
+          />
 
-          <label className=''>What type of post is it?</label>
+          <label className="">What type of post is it?</label>
           {/* radio button conditionals */}
-          { 
-            postType == 'offering'
-            ? 
-              <div>
 
-                <div className='flex'>
-                  <label className='' htmlFor='looking'>Request</label>
-                  <input type={'radio'} name='postType' value='looking' onChange={(e) => setPostType(e.target.value)}/>
-                </div>
+          <div>
+            <div className="flex">
+              <label className="" htmlFor="looking">
+                Request
+              </label>
+              <input
+                defaultChecked={
+                  postInfo.postType ? postInfo.postType === "looking" : false
+                }
+                type={"radio"}
+                name="postType"
+                value="looking"
+                // onChange={(e) => setPostType(e.target.value)}
+              />
+            </div>
 
+            <div className="flex">
+              <label className="" htmlFor="offering">
+                Offer
+              </label>
+              <input
+                defaultChecked={
+                  postInfo.postType ? postInfo.postType === "offering" : true
+                }
+                type={"radio"}
+                name="postType"
+                value="offering"
+                // onChange={(e) => setPostType(e.target.value)}
+              />
+            </div>
+          </div>
 
-                <div className='flex'>
-                  <label className='' htmlFor='offering'>Offer</label>
-                  <input selected type={'radio'} name='postType' value='offering'onChange={(e) => setPostType(e.target.value)}/>
-                </div>
+          <label className="" htmlFor="desc">
+            Description of item(s)
+          </label>
+          <textarea
+            className=""
+            name="description"
+            draggable="false"
+            rows={"16"}
+            cols={"50"}
+            defaultValue={postInfo.description || ""}
+            // onChange={(e) => setPostDesc(e.target.value)}
+          />
 
-              </div>
-            : 
-              <div>
-                <div className='flex'>
-                  <label className='' htmlFor='looking'>Request</label>
-                  <input selected type={'radio'} name='postType' value='looking' onChange={(e) => setPostType(e.target.value)}/>
-                </div>
+          <label className="" htmlFor="location">
+            Location of item
+          </label>
+          <input
+            type={"text"}
+            className=""
+            name="location"
+            defaultValue={postInfo.location || ""}
+            // onChange={(e) => setPostLocation(e.target.value)}
+          />
 
-                <div className='flex'>
-                  <label className='' htmlFor='offering'>Offer</label>
-                  <input type={'radio'} name='postType' value='offering'onChange={(e) => setPostType(e.target.value)}/>
-                </div>
-              </div>
-          }
-          
-          <label className='' htmlFor='desc'>Description of item(s)</label>
-          <textarea className='' name='description' draggable='false' rows={'16'} cols={'50'} value={postDesc} onChange={(e) => setPostDesc(e.target.value)}/>
-
-          <label className='' htmlFor='location'>Location of item</label>
-          <input type={'text'} className='' name='location' value={postLocation} onChange={(e) => setPostLocation(e.target.value)}/>
-
-          <button type='submit' className='' >Submit</button>
+          <button type="submit" className="">
+            Submit
+          </button>
         </div>
         {/* end post information container */}
-
-        
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PostForm
-
+export default PostForm;
