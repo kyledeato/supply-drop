@@ -6,7 +6,7 @@ module.exports = {
             console.log('here')
             let post = req.body
             console.log(post)
-            if (post.offering == true && post.image != '') {
+            if (post.postType == "offering" && post.image != '') {
                 throw new Error("Post must contain an image")
             }
             const newpost = await Post.create(post)

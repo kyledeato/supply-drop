@@ -2,12 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 let PostSchema = new Schema({
 
-    looking: {
-        type: Boolean,
-    },
-
-    offering: {
-        type: Boolean,
+    postType: {
+        type: String,
+        required: [true, "A post type is required"]
     },
 
     title: {
