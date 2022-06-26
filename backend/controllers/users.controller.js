@@ -43,10 +43,8 @@ module.exports = {
                     res.cookie("usertoken", userToken, process.env.SECRET_KEY, {
                         httpOnly: true
                     })
-                        .json({ msg: "success!", user: user });
+                    res.json(user)
                 })
-            res.json(user)
-
         }
         catch (err) {
             console.log(req.body)
