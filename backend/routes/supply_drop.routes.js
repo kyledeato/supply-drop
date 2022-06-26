@@ -12,4 +12,11 @@ module.exports = function (app) {
 	app.put('/api/user/:id', UserController.updateUser)
 	app.delete('/api/user/:id', UserController.deleteUser)
 	app.get('/api/auth', authenticate, UserController.getLoggedUser)
+
+	//Post Routes
+	app.post('/api/post/new', PostController.createPost)
+	app.get('/api/post/', PostController.getAllPosts)
+	app.get('/api/post/:id', PostController.getPost)
+	app.put('/api/post/:id', PostController.updatePost)
+	app.delete('/api/post/:id', PostController.deletePost)
 }

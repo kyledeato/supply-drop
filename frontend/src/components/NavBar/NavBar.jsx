@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logout from '../Logout/Logout'
-import './NavBar.css'
 
 const NavBar = () => {
   return (

@@ -5,7 +5,7 @@ console.log(User);
 
 module.exports = {
     login: async (req, res) => {
-        const user = await User.findOneUser({ email: req.body.email });
+        const user = await User.findOne({ email: req.body.email });
 
         if (user === null) {
             return res.sendStatus(400);
@@ -45,24 +45,25 @@ module.exports = {
                     })
                         .json({ msg: "success!", user: user });
                 })
-            res.json(newuser)
+            res.json(user)
 
         }
         catch (err) {
+            console.log(req.body)
             console.log(err)
             res.status(400).json(err)
         }
     },
 
     logout: (req, res) => {
-        res.clearCooke('usertoken');
+        res.clearCookie('usertoken');
         res.sendStatus(200);
     },
 
     getUser: (req, res) => {
-        User.findOneUser({ _id: req.params.id })
+        User.findOne({ _id: req.params.id })
             .then(user => res.json(user))
-            .catch(err => res.json(err))
+            .catch(err => res.status(404).json(err))
     },
 
     getAllUsers: (req, res) => {
@@ -72,7 +73,7 @@ module.exports = {
     },
 
     updateUser: (req, res) => {
-        User.findOneAndUpdate = ({ _id: req.params.id }, req.body, { new: true })
+        User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
             .then(updateUser => res.json(updateUser))
             .catch(err => res.json(err))
     },
@@ -86,7 +87,7 @@ module.exports = {
     getLoggedUser: (req, res) => {
         const userToken = res.locals.payload;
         console.log(userToken)
-        User.findOneUser({ _id: userToken.id })
+        User.findOne({ _id: userToken.id })
             .then(loggedUser => {
                 res.json(loggedUser)
             })

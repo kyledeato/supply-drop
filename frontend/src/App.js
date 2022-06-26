@@ -7,6 +7,7 @@ import Home from './views/Home/Home';
 import Account from './views/Account/Account';
 import View from './views/View/View';
 import AllPost from './views/AllPost/AllPost';
+import Logout from './components/Logout/Logout';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>}></Route>
           <Route path="/create" element={<Home/>}></Route>
           <Route path="/allposts" element={<AllPost/>}></Route>
+          <Route path="/logout" element={<Logout/>}></Route>
           
 
           {/* IF YOU ARE DOING ACCOUNT PLZ CHANGE -> will be /account/id try to make id into the username if you can or not */}
