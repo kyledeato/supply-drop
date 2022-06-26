@@ -50,11 +50,11 @@ const UserLogin = (props) => {
         <div>
             <form onSubmit={handleSubmit}>
                 {renderErrorMessage("pass")}
-                <div className="mb-3" controlId="formBasicEmail">
+                <div className="mb-3" controlid="formBasicEmail">
                     <label>Email </label>
                     <input type="email" placeholder="Enter email" required name="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                <div className="mb-3" controlId="formBasicPassword">
+                <div className="mb-3" controlid="formBasicPassword">
                     <label>Password </label>
                     <input type="password" placeholder="Enter password" required name="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>

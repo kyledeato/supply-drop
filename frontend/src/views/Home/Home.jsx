@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Link } from 'react-router-dom'
 import PostForm from '../../components/PostForm'
 import HomePosts from '../../components/HomePosts/HomePosts'
-import Logout from '../../components/Logout/Logout'
 import NavBar from '../../components/NavBar/NavBar'
 
 const Home = () => {
@@ -34,9 +32,7 @@ const Home = () => {
         <div>
             <NavBar/>
             <h1>HOMEPAGE</h1>
-            {
-                user&&<PostForm userID={user._id}/>
-            }
+            { user && <PostForm userID={user._id}/> }
             <HomePosts />
             {user ? <div className="logged">
                 <p>

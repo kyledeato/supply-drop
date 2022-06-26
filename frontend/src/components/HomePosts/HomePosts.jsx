@@ -16,7 +16,7 @@ const HomePosts = () => {
         console.log(err);
       });
   }, []);
-  const handleDelete = (postID) => {
+    const handleDelete = (postID) => {
     axios.delete(`http://localhost:8000/api/post/${postID}`, {withCredentials:true})
       .then((res) => {
         console.log(res.data, "Delete Successful");
