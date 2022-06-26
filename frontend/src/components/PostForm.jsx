@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useParams, Link, useNavigate} from "react-router-dom";
 
 const PostForm = (props) => {
-  const {postID, userID, isEdit} = useParams();
+  const { userID, postID } = props;
   const [postTitle, setPostTitle] = useState('');
   const [postDesc, setPostDesc] = useState('');
   const [postType, setPostType] = useState('');
@@ -37,14 +37,14 @@ const PostForm = (props) => {
 
     const postData = {
       'title' : postTitle,
-      'desc' : postDesc,
+      'description' : postDesc,
       'postType' : postType,
       'location' : postLocation,
       'image' : postImage,
       'postedBy' : userID
     };
 
-    axios.post(`http://localhost:8000/api/post/new`, {postData}, {withCredentials: true})
+    axios.post(`http://localhost:8000/api/post/new`, postData, {withCredentials: true})
     .then((res) => {
         console.log(res);
     })
@@ -63,7 +63,7 @@ const PostForm = (props) => {
 
   return (
     <div>
-      <form className='flex' action={submitHandler} method='post'>
+      <form className='flex' onSubmit={submitHandler} method='post'>
         
         <input />
         {/* image container */}
@@ -87,13 +87,13 @@ const PostForm = (props) => {
 
                 <div className='flex'>
                   <label className='' htmlFor='looking'>Request</label>
-                  <input type={'radio'} name='looking' value='looking' onChange={(e) => setPostType(e.target.value)}/>
+                  <input type={'radio'} name='postType' value='looking' onChange={(e) => setPostType(e.target.value)}/>
                 </div>
 
 
                 <div className='flex'>
                   <label className='' htmlFor='offering'>Offer</label>
-                  <input selected type={'radio'} name='offering' value='offering'onChange={(e) => setPostType(e.target.value)}/>
+                  <input selected type={'radio'} name='postType' value='offering'onChange={(e) => setPostType(e.target.value)}/>
                 </div>
 
               </div>
@@ -101,18 +101,18 @@ const PostForm = (props) => {
               <div>
                 <div className='flex'>
                   <label className='' htmlFor='looking'>Request</label>
-                  <input selected type={'radio'} name='looking' value='looking' onChange={(e) => setPostType(e.target.value)}/>
+                  <input selected type={'radio'} name='postType' value='looking' onChange={(e) => setPostType(e.target.value)}/>
                 </div>
 
                 <div className='flex'>
                   <label className='' htmlFor='offering'>Offer</label>
-                  <input type={'radio'} name='offering' value='offering'onChange={(e) => setPostType(e.target.value)}/>
+                  <input type={'radio'} name='postType' value='offering'onChange={(e) => setPostType(e.target.value)}/>
                 </div>
               </div>
           }
           
           <label className='' htmlFor='desc'>Description of item(s)</label>
-          <textarea className='' name='' draggable='false' rows={'16'} cols={'50'} value={postDesc} onChange={(e) => setPostDesc(e.target.value)}/>
+          <textarea className='' name='description' draggable='false' rows={'16'} cols={'50'} value={postDesc} onChange={(e) => setPostDesc(e.target.value)}/>
 
           <label className='' htmlFor='location'>Location of item</label>
           <input type={'text'} className='' name='location' value={postLocation} onChange={(e) => setPostLocation(e.target.value)}/>
