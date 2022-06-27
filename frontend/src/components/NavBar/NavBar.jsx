@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link,useNavigate } from 'react-router-dom'
 import Logout from '../Logout/Logout'
 import './NavBar.css'
+import logo from './logo.webp'
 const NavBar = () => {
     const [user, setUser] = useState();
     const navigate = useNavigate();
@@ -30,8 +31,9 @@ const NavBar = () => {
     return (
         <div className='nav flex align-center'>
             <div className='flex align-center'>
-                <h1>Supply Drop</h1>
-                <input type="text" placeholder='Search' />
+                <h1 className='title-logo'>Supply <span className='gold'>Drop</span></h1>
+                <img src={logo} alt="" srcset="" className='supply-drop-logo'/>
+                
             </div>
             <div className='flex align-center'>
                 <Link to="/" className='no-border' >Home</Link>
@@ -40,8 +42,8 @@ const NavBar = () => {
                 {user ? 
                 <div className="logged flex align-center">
                     <a onClick={handleSubmit}>Logout</a>
-                    <p>
-                        Signed in as: {user.firstName} {user.lastName}
+                    <p className='user'>
+                        Hello, <span className='username'>{user.firstName} {user.lastName}</span>
                     </p>
                 </div>
                 : <Link to="/login">Login</Link>}

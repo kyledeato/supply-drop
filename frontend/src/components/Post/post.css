@@ -67,3 +67,7 @@
     display: flex;
     justify-content: space-between;
 }
+
+.supply-drop {
+    height: 50px;
+}
