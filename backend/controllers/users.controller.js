@@ -36,7 +36,7 @@ module.exports = {
         try {
             let user = req.body;
             if (user.password != user.confirmPassword) {
-                throw new Error("Passwords don't match");
+                throw new Error('pw-missmatch');
             }
             const newuser = await User.create(user).then((user) => {
                 console.log('HERE');
@@ -53,8 +53,15 @@ module.exports = {
             });
         } catch (err) {
             console.log(req.body);
-            console.log(err);
-            res.status(400).json(err);
+            if (err.message === 'pw-missmatch') {
+                res.status(400).json({
+                    errors: {
+                        confirmPassword: { message: "Passwords don't match" },
+                    },
+                });
+            } else {
+                res.status(400).json(err);
+            }
         }
     },
 
@@ -64,21 +71,44 @@ module.exports = {
     },
 
     getUser: (req, res) => {
-        User.findOne({ _id: req.params.id })
+        User.findOne({ _id: req.params.id }, '-password')
             .then((user) => res.json(user))
             .catch((err) => res.status(404).json(err));
     },
 
     getAllUsers: (req, res) => {
-        User.find({})
+        User.find({}, '-password')
             .then((user) => res.json(user))
             .catch((err) => res.json(err));
     },
 
-    updateUser: (req, res) => {
-        User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-            .then((updateUser) => res.json(updateUser))
-            .catch((err) => res.json(err));
+    updateUser: async (req, res) => {
+        try {
+            let user = req.body;
+
+            if (user.password) {
+                if (user.password !== user.confirmPassword) {
+                    throw new Error('pw-missmatch');
+                } else {
+                    user.password = bcrypt.hashSync(req.body.password, 10);
+                }
+            }
+
+            User.findOneAndUpdate({ _id: req.params.id }, user, {
+                new: true,
+            }).then((updateUser) => res.json(updateUser));
+        } catch (err) {
+            console.log(req.body);
+            if (err.message === 'pw-missmatch') {
+                res.status(400).json({
+                    errors: {
+                        confirmPassword: { message: "Passwords don't match" },
+                    },
+                });
+            } else {
+                res.status(400).json(err);
+            }
+        }
     },
 
     deleteUser: (req, res) => {
@@ -90,7 +120,7 @@ module.exports = {
     getLoggedUser: (req, res) => {
         const userToken = res.locals.payload;
         console.log(userToken);
-        User.findOne({ _id: userToken.id })
+        User.findOne({ _id: userToken.id }, '-password')
             .then((loggedUser) => {
                 res.json(loggedUser);
             })

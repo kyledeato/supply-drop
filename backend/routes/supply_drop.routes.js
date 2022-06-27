@@ -23,6 +23,11 @@ module.exports = function (app) {
     );
     app.get('/api/post/', PostController.getAllPosts);
     app.get('/api/post/:id', PostController.getPost);
-    app.put('/api/post/:id', formdataParser.none(), PostController.updatePost);
-    app.delete('/api/post/:id', PostController.deletePost);
+    app.put(
+        '/api/post/:id',
+        formdataParser.single('photo'),
+        authenticate,
+        PostController.updatePost
+    );
+    app.delete('/api/post/:id', authenticate, PostController.deletePost);
 };

@@ -36,13 +36,39 @@ module.exports = {
     },
 
     updatePost: (req, res) => {
-        Post.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-            .then((updatePost) => res.json(updatePost))
-            .catch((err) => res.json(err));
+        try {
+            const userToken = res.locals.payload;
+            const file = req.file;
+            let post = req.body;
+            let query = { _id: req.params.id, postedBy: userToken.id };
+
+            if (file) {
+                post['image'] = file.filename;
+                query['postType'] = 'offering';
+            }
+
+            Post.findOneAndUpdate(query, post, {
+                new: true,
+            }).then((updatePost) => {
+                if (updatePost) {
+                    res.json(updatePost);
+                } else {
+                    res.status(404).json({
+                        message: 'Post not found or wrong postType',
+                    });
+                }
+            });
+        } catch (err) {
+            console.log(req.body);
+            console.log(err);
+            res.status(400).json(err);
+        }
     },
 
     deletePost: (req, res) => {
-        Post.deleteOne({ _id: req.params.id })
+        const userToken = res.locals.payload;
+
+        Post.deleteOne({ _id: req.params.id, postedBy: userToken.id })
             .then((deleteConfirmation) => res.json(deleteConfirmation))
             .catch((err) => res.json(err));
     },
