@@ -7,7 +7,7 @@ import editLogo from './edit.png';
 import trashLogo from './trash.png';
 import locationLogo from './location.png';
 import { useNavigate } from 'react-router-dom';
-import './Homepost.css';
+
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
@@ -74,14 +74,15 @@ const HomePosts = () => {
                 <table>
                     {posts.map((post, index) => (
                         <React.Fragment key={post._id}>
+                            <div className='post-contain'>
                             <div
-                                className="post-header"
+                                
                                 onClick={() => {
                                     console.log('\nparent');
                                     embiggenComponent(index, true, 'post');
                                 }}
                             >
-                                <div>
+                                <div >
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img
@@ -100,7 +101,7 @@ const HomePosts = () => {
                                     {post.description}
                                 </div>
                             </div>
-                            ;
+                            
                             <div className="display-flex-center">
                                 {post.image ? (
                                     <img
@@ -116,6 +117,7 @@ const HomePosts = () => {
                             </div>
                             {post.postedBy === user._id && (
                                 <div className="edit-delete-container">
+                                  
                                     <img
                                         src={editLogo}
                                         alt=""
@@ -154,6 +156,7 @@ const HomePosts = () => {
                                     index={index}
                                 />
                             )}
+                            </div>
                         </React.Fragment>
                     ))}
                 </table>
