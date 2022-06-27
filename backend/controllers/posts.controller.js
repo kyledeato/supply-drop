@@ -36,9 +36,26 @@ module.exports = {
     },
 
     updatePost: (req, res) => {
-        Post.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-            .then((updatePost) => res.json(updatePost))
-            .catch((err) => res.json(err));
+        try {
+            const file = req.file;
+            let post = req.body;
+            let query = { _id: req.params.id };
+
+            if (file) {
+                post['image'] = file.filename;
+                query['postType'] = 'offering';
+            } else {
+                throw new Error('Post must contain an image');
+            }
+
+            Post.findOneAndUpdate(query, post, {
+                new: true,
+            }).then((updatePost) => res.json(updatePost));
+        } catch (err) {
+            console.log(req.body);
+            console.log(err);
+            res.status(400).json(err);
+        }
     },
 
     deletePost: (req, res) => {
