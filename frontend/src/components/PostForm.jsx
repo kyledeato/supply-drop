@@ -1,9 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Button from '@mui/material/Button';
+import Input from '@mui/material';
+import { TextareaAutosize } from '@mui/material';
 import './PostForm/PostForm.css'
 import './PostForm.css'
+
 
 const PostForm = (props) => {
     const { userID, postID, embiggenForm, index } = props;
@@ -11,6 +20,10 @@ const PostForm = (props) => {
     const [errors, setErrors] = useState('');
     const navigate = useNavigate();
 
+    const Input = styled('input')({
+        display: 'none',
+    });
+    
     useEffect(() => {
         if (postID) {
             getPostInfo();
@@ -101,7 +114,7 @@ const PostForm = (props) => {
     }
 
     return (
-        <div className="post-form-container">
+        <div className="allcontain">
             <form
                 className="flex post-form"
                 onSubmit={submitHandler}
@@ -130,76 +143,54 @@ const PostForm = (props) => {
 
                 {/* post information container */}
                 <div>
-                    <label htmlFor="title">Post Title:</label>
-                    <input
-                        type={'text'}
+                    <TextField
                         name="title"
-                        className=""
+                        label="Post Title"
                         defaultValue={postInfo.title || ''}
                     />
 
-                    <label className="">What type of post is it?</label>
+
                     {/* radio button conditionals */}
 
-                    <div>
+                    <div style={{ marginTop: '15px' }}>
+                        <label className="">What type of post is it?</label>
                         {postID ? (
                             postInfo.postType || ''
                         ) : (
                             <>
                                 {' '}
                                 <div className="flex">
-                                    <label className="" htmlFor="looking">
-                                        Request
-                                    </label>
-                                    <input
-                                        id="looking"
-                                        defaultChecked={false}
-                                        type={'radio'}
-                                        name="postType"
-                                        value="looking"
-                                    />
-                                </div>
-                                <div className="flex">
-                                    <label className="" htmlFor="offering">
-                                        Offer
-                                    </label>
-                                    <input
-                                        id="offering"
-                                        defaultChecked={true}
-                                        type={'radio'}
-                                        name="postType"
-                                        value="offering"
-                                    />
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="female"
+                                        name="radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="offering" control={<Radio />} label="Offering" />
+                                        <FormControlLabel value="request" control={<Radio />} label="Request" />
+                                    </RadioGroup>
                                 </div>
                             </>
                         )}
                     </div>
+                    <div style={{ marginTop: '15px' }}>
+                        <label className="" htmlFor="desc">
+                            Description of item(s):
+                        </label>
 
-                    <label className="" htmlFor="desc">
-                        Description of item(s)
-                    </label>
-                    <textarea
-                        className=""
-                        name="description"
-                        draggable="false"
-                        rows={'16'}
-                        cols={'50'}
-                        defaultValue={postInfo.description || ''}
-                    />
+                        <TextareaAutosize
+                            style={{ marginTop: '15px', width: 250 }}
+                            maxRows={6}
+                            aria-label="maximum height"
+                            defaultValue={postInfo.description || ''}
+                            name="description"
+                            className=""
+                        />
+                    </div>
+                    <div>
 
-                    <label className="" htmlFor="location">
-                        Location of item
-                    </label>
-                    <input
-                        type={'text'}
-                        className=""
-                        name="location"
-                        defaultValue={postInfo.location || ''}
-                    />
-
-                    <button type="submit" className="">
-                        Submit
-                    </button>
+                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" />
+                    </div>
+                    <Button style={{ marginTop: '10px' }} type="submit" variant="contained">Submit</Button>
                 </div>
                 {/* end post information container */}
             </form>
