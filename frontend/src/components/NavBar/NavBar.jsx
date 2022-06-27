@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import Logout from '../Logout/Logout'
 import './NavBar.css'
 const NavBar = () => {
-    const [user, setUser] = useState()
+    const [user, setUser] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/auth`, { withCredentials: true })
@@ -25,29 +26,29 @@ const NavBar = () => {
             .catch(err => console.log(err))
     }
 
-  return (
-    
-    <div className='nav flex align-center'>
-        <div className='flex align-center'>
-            <h1>Supply Drop</h1>
-            <input type="text" placeholder='Search' />
-        </div>
-        <div className='flex align-center'>
-            <Link to="/" className='no-border' >Home</Link>
-            <Link to="/allposts" >All Posts</Link>
-            <Link to="/create" >Create a Post</Link>
-            {user && <Link to={`/account/${user._id}`}>Account</Link>}
-            {user ? <div className="logged">
-                <button onClick={handleSubmit}>Logout</button>
-                <p>
-                    Signed in as: {user.firstName} {user.lastName}
-                </p>
+    return (
+
+        <div className='nav flex align-center'>
+            <div className='flex align-center'>
+                <h1>Supply Drop</h1>
+                <input type="text" placeholder='Search' />
             </div>
-                  :
-                 <Link to="/login">Login</Link>}
+            <div className='flex align-center'>
+                <Link to="/" className='no-border' >Home</Link>
+                <Link to="/allposts" >All Posts</Link>
+                <Link to="/create" >Create a Post</Link>
+                {user && <Link to={`/account/${user._id}`}>Account</Link>}
+                {user ? <div className="logged">
+                    <button onClick={handleSubmit}>Logout</button>
+                    <p>
+                        Signed in as: {user.firstName} {user.lastName}
+                    </p>
+                </div>
+                    :
+                    <Link to="/login">Login</Link>}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default NavBar
