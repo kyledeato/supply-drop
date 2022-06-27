@@ -9,9 +9,10 @@ import locationLogo from './location.png';
 import { useNavigate } from 'react-router-dom';
 
 
-const HomePosts = () => {
+const HomePosts = (props) => {
     const [posts, setPosts] = useState([]);
     const [user, setUser] = useState({});
+    const id = props.id;
 
     useEffect(() => {
         axios
@@ -36,6 +37,13 @@ const HomePosts = () => {
                     element.bigPost = false;
                     element.bigEdit = false;
                 });
+
+                if (id) {
+                    data = data.filter(function (props) {
+                        return props.postedBy === id
+                    })
+                }
+
                 setPosts(data);
             })
             .catch((err) => {
@@ -71,7 +79,7 @@ const HomePosts = () => {
     return (
         <div>
             {
-                <table>
+                <div>
                     {posts.map((post, index) => (
                         <React.Fragment key={post._id}>
                             <div className='post-contain'>
@@ -88,7 +96,7 @@ const HomePosts = () => {
                                         <img
                                             src={locationLogo}
                                             alt=""
-                                            srcset=""
+                                            srcSet=""
                                             className="locationImage"
                                         />
                                         <p className="location">
@@ -159,7 +167,7 @@ const HomePosts = () => {
                             </div>
                         </React.Fragment>
                     ))}
-                </table>
+                </div>
             }
         </div>
     );
