@@ -20,7 +20,10 @@ const HomePosts = () => {
                 setUser(res.data);
                 updatePosts();
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                updatePosts();
+            });
     }, []);
 
     const updatePosts = () => {
