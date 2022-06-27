@@ -90,6 +90,7 @@ const HomePosts = (props) => {
                                     embiggenComponent(index, true, 'post');
                                 }}
                             >
+
                                     <div className='post-header'>
                                         {!id &&
                                         <h6 className="name">{post.postedBy.firstName} {post.postedBy.lastName}</h6>

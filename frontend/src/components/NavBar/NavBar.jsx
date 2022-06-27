@@ -27,25 +27,24 @@ const NavBar = () => {
     }
 
 
-  return (
-    
-    <div className='nav flex align-center'>
-        <div className='flex align-center'>
-            <h1>Supply Drop</h1>
-            <input type="text" placeholder='Search' />
-        </div>
-        <div className='flex align-center'>
-            <Link to="/" className='no-border' >Home</Link>
-            <Link to="/allposts" >All Posts</Link>
-            {user && <Link to={`/account/${user._id}`}>Account</Link>}
-            {user ? 
-                <div className="logged">
-                    <button onClick={handleSubmit}>Logout</button>
+    return (
+        <div className='nav flex align-center'>
+            <div className='flex align-center'>
+                <h1>Supply Drop</h1>
+                <input type="text" placeholder='Search' />
+            </div>
+            <div className='flex align-center'>
+                <Link to="/" className='no-border' >Home</Link>
+                <Link to="/allposts" >All Posts</Link>
+                {user && <Link to={`/account/${user._id}`}>Account</Link>}
+                {user ? 
+                <div className="logged flex align-center">
+                    <a onClick={handleSubmit}>Logout</a>
                     <p>
                         Signed in as: {user.firstName} {user.lastName}
                     </p>
-               </div>
-            : <Link to="/login">Login</Link>}
+                </div>
+                : <Link to="/login">Login</Link>}
 
             </div>
         </div>
