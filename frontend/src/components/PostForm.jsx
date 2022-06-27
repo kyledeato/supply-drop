@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PostForm = (props) => {
     const { userID, postID, embiggenForm, index } = props;
     const [postInfo, setPostInfo] = useState({});
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,20 +33,20 @@ const PostForm = (props) => {
 
     function submitHandler(e) {
         e.preventDefault();
-        const inputs = e.currentTarget.querySelectorAll("input,textarea");
+        const inputs = e.currentTarget.querySelectorAll('input,textarea');
         let data = new FormData();
 
         inputs.forEach((input) => {
-            if (input.name === "") {
+            if (input.name === '') {
                 return;
             }
 
-            if (input.type === "file") {
+            if (input.type === 'file') {
                 const fileList = input.files;
                 if (fileList[0]) {
                     data.append(input.name, fileList[0]);
                 }
-            } else if (input.type === "radio") {
+            } else if (input.type === 'radio') {
                 if (input.checked) {
                     data.append(input.name, input.value);
                 }
@@ -58,11 +58,11 @@ const PostForm = (props) => {
         });
 
         if (postID) {
-            if (!data.has("postType")) {
-                // data.append("postType", postInfo.postType);
+            if (!data.has('postType')) {
+                data.append('postType', postInfo.postType);
             }
             // data.append("postedBy", postInfo.postedBy);
-            data.append("_id", postInfo._id);
+            data.append('_id', postInfo._id);
 
             axios
                 .put(`http://localhost:8000/api/post/${postID}`, data, {
@@ -70,17 +70,16 @@ const PostForm = (props) => {
                 })
                 .then((res) => {
                     console.log(res);
-                    embiggenForm(index, false, "form");
-                    refreshPage()
+                    embiggenForm(index, false, 'form');
+                    refreshPage();
                 })
                 .catch((err) => {
                     console.log(err.response.data.errors);
                     setErrors(err.response.data.errors);
                     return errors;
                 });
-
         } else {
-            data.append("postedBy", userID);
+            data.append('postedBy', userID);
 
             axios
                 .post(`http://localhost:8000/api/post/new`, data, {
@@ -88,8 +87,8 @@ const PostForm = (props) => {
                 })
                 .then((res) => {
                     console.log(res);
-                    embiggenForm(index, false, "form");
-                    refreshPage()
+                    embiggenForm(index, false, 'form');
+                    refreshPage();
                 })
                 .catch((err) => {
                     console.log(err.response.data.errors);
@@ -108,7 +107,7 @@ const PostForm = (props) => {
             >
                 <button
                     onClick={() => {
-                        embiggenForm(index, false, "form");
+                        embiggenForm(index, false, 'form');
                     }}
                 >
                     [X]
@@ -120,7 +119,7 @@ const PostForm = (props) => {
                         Add a photo
                     </label>
                     <input
-                        type={"file"}
+                        type={'file'}
                         accept=".png, .jpg, .jpeg"
                         name="photo"
                     />
@@ -131,10 +130,10 @@ const PostForm = (props) => {
                 <div>
                     <label htmlFor="title">Post Title:</label>
                     <input
-                        type={"text"}
+                        type={'text'}
                         name="title"
                         className=""
-                        defaultValue={postInfo.title || ""}
+                        defaultValue={postInfo.title || ''}
                     />
 
                     <label className="">What type of post is it?</label>
@@ -142,10 +141,10 @@ const PostForm = (props) => {
 
                     <div>
                         {postID ? (
-                            postInfo.postType || ""
+                            postInfo.postType || ''
                         ) : (
                             <>
-                                {" "}
+                                {' '}
                                 <div className="flex">
                                     <label className="" htmlFor="looking">
                                         Request
@@ -153,7 +152,7 @@ const PostForm = (props) => {
                                     <input
                                         id="looking"
                                         defaultChecked={false}
-                                        type={"radio"}
+                                        type={'radio'}
                                         name="postType"
                                         value="looking"
                                     />
@@ -165,7 +164,7 @@ const PostForm = (props) => {
                                     <input
                                         id="offering"
                                         defaultChecked={true}
-                                        type={"radio"}
+                                        type={'radio'}
                                         name="postType"
                                         value="offering"
                                     />
@@ -181,19 +180,19 @@ const PostForm = (props) => {
                         className=""
                         name="description"
                         draggable="false"
-                        rows={"16"}
-                        cols={"50"}
-                        defaultValue={postInfo.description || ""}
+                        rows={'16'}
+                        cols={'50'}
+                        defaultValue={postInfo.description || ''}
                     />
 
                     <label className="" htmlFor="location">
                         Location of item
                     </label>
                     <input
-                        type={"text"}
+                        type={'text'}
                         className=""
                         name="location"
-                        defaultValue={postInfo.location || ""}
+                        defaultValue={postInfo.location || ''}
                     />
 
                     <button type="submit" className="">

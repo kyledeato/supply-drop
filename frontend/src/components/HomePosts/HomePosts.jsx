@@ -11,10 +11,16 @@ import './Homepost.css';
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
-    const editRef = useRef(false);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
-        updatePosts();
+        axios
+            .get(`http://localhost:8000/api/auth`, { withCredentials: true })
+            .then((res) => {
+                setUser(res.data);
+                updatePosts();
+            })
+            .catch((err) => console.log(err));
     }, []);
 
     const updatePosts = () => {
@@ -28,7 +34,6 @@ const HomePosts = () => {
                     element.bigEdit = false;
                 });
                 setPosts(data);
-                // console.table(data);
             })
             .catch((err) => {
                 console.log(err);
@@ -62,81 +67,94 @@ const HomePosts = () => {
 
     return (
         <div>
-            {<table>
-            {posts.map((post, index) => (
-                <React.Fragment key={post._id}>
-                    <div
-                        className="post-header"
-                        onClick={() => {
-                            console.log('\nparent');
-                            embiggenComponent(index, true, 'post');
-                        }}
-                    >
-                        <div>
-                            <h5 className="title">{post.title}</h5>
-                            <div className="location-container">
-                                <img
-                                    src={locationLogo}
-                                    alt=""
-                                    srcset=""
-                                    className="locationImage"
-                                />
-                                <p className="location">{post.location}</p>
-                            </div>
-                        </div>
+            {
+                <table>
+                    {posts.map((post, index) => (
+                        <React.Fragment key={post._id}>
+                            <div
+                                className="post-header"
+                                onClick={() => {
+                                    console.log('\nparent');
+                                    embiggenComponent(index, true, 'post');
+                                }}
+                            >
+                                <div>
+                                    <h5 className="title">{post.title}</h5>
+                                    <div className="location-container">
+                                        <img
+                                            src={locationLogo}
+                                            alt=""
+                                            srcset=""
+                                            className="locationImage"
+                                        />
+                                        <p className="location">
+                                            {post.location}
+                                        </p>
+                                    </div>
+                                </div>
 
-                        <div className="description">{post.description}</div>
-                    </div>
-                    ;
-                    <div className="display-flex-center">
-                        {post.image ? (
-                            <img
-                                src={'http://localhost:8000/img/' + post.image}
-                                alt={post.title}
-                            />
-                        ) : (
-                            <span>no image</span>
-                        )}
-                    </div>
-                    <div className="edit-delete-container">
-                        <img
-                            src={editLogo}
-                            alt=""
-                            srcset=""
-                            className="edit-trash"
-                            onClick={() => {
-                                // navigate(`/edit/post/${post._id}`)
-                                editRef.current = true;
-                                embiggenComponent(index, true, 'edit');
-                            }}
-                        />
-                        <img
-                            src={trashLogo}
-                            alt=""
-                            srcset=""
-                            onClick={() => {
-                                handleDelete(post._id);
-                            }}
-                            className="edit-trash"
-                        />
-                    </div>
-                    {post.bigEdit && (
-                        <PostForm
-                            embiggenForm={embiggenComponent}
-                            index={index}
-                            postID={post._id}
-                        />
-                    )}
-                    {post.bigPost && (
-                        <Post
-                            {...post}
-                            embiggenForm={embiggenComponent}
-                            index={index}
-                        />
-                    )}
-                </React.Fragment>
-            ))}
-            </table>}
+                                <div className="description">
+                                    {post.description}
+                                </div>
+                            </div>
+                            ;
+                            <div className="display-flex-center">
+                                {post.image ? (
+                                    <img
+                                        src={
+                                            'http://localhost:8000/img/' +
+                                            post.image
+                                        }
+                                        alt={post.title}
+                                    />
+                                ) : (
+                                    <span>no image</span>
+                                )}
+                            </div>
+                            {post.postedBy === user._id && (
+                                <div className="edit-delete-container">
+                                    <img
+                                        src={editLogo}
+                                        alt=""
+                                        srcset=""
+                                        className="edit-trash"
+                                        onClick={() => {
+                                            embiggenComponent(
+                                                index,
+                                                true,
+                                                'edit'
+                                            );
+                                        }}
+                                    />
+                                    <img
+                                        src={trashLogo}
+                                        alt=""
+                                        srcset=""
+                                        onClick={() => {
+                                            handleDelete(post._id);
+                                        }}
+                                        className="edit-trash"
+                                    />
+                                </div>
+                            )}
+                            {post.bigEdit && (
+                                <PostForm
+                                    embiggenForm={embiggenComponent}
+                                    index={index}
+                                    postID={post._id}
+                                />
+                            )}
+                            {post.bigPost && (
+                                <Post
+                                    {...post}
+                                    embiggenForm={embiggenComponent}
+                                    index={index}
+                                />
+                            )}
+                        </React.Fragment>
+                    ))}
+                </table>
+            }
         </div>
     );
 };
