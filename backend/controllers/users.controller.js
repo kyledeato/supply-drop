@@ -36,7 +36,7 @@ module.exports = {
         try {
             let user = req.body;
             if (user.password != user.confirmPassword) {
-                throw new Error("Passwords don't match");
+                throw new Error('pw-missmatch');
             }
             const newuser = await User.create(user).then((user) => {
                 console.log('HERE');
@@ -53,8 +53,15 @@ module.exports = {
             });
         } catch (err) {
             console.log(req.body);
-            console.log(err);
-            res.status(400).json(err);
+            if (err.message === 'pw-missmatch') {
+                res.status(400).json({
+                    errors: {
+                        confirmPassword: { message: "Passwords don't match" },
+                    },
+                });
+            } else {
+                res.status(400).json(err);
+            }
         }
     },
 
@@ -81,7 +88,7 @@ module.exports = {
 
             if (user.password) {
                 if (user.password !== user.confirmPassword) {
-                    throw new Error("Passwords don't match");
+                    throw new Error('pw-missmatch');
                 } else {
                     user.password = bcrypt.hashSync(req.body.password, 10);
                 }
@@ -92,8 +99,15 @@ module.exports = {
             }).then((updateUser) => res.json(updateUser));
         } catch (err) {
             console.log(req.body);
-            console.log(err);
-            res.status(400).json(err);
+            if (err.message === 'pw-missmatch') {
+                res.status(400).json({
+                    errors: {
+                        confirmPassword: { message: "Passwords don't match" },
+                    },
+                });
+            } else {
+                res.status(400).json(err);
+            }
         }
     },
 
