@@ -27,6 +27,10 @@ const PostForm = (props) => {
         }
     }
 
+    function refreshPage() {
+        window.location.reload(false);
+    }
+
     function submitHandler(e) {
         e.preventDefault();
         const inputs = e.currentTarget.querySelectorAll("input,textarea");
@@ -67,13 +71,14 @@ const PostForm = (props) => {
                 .then((res) => {
                     console.log(res);
                     embiggenForm(index, false, "form");
-                    navigate("/");
+                    refreshPage()
                 })
                 .catch((err) => {
                     console.log(err.response.data.errors);
                     setErrors(err.response.data.errors);
                     return errors;
                 });
+
         } else {
             data.append("postedBy", userID);
 
@@ -84,7 +89,7 @@ const PostForm = (props) => {
                 .then((res) => {
                     console.log(res);
                     embiggenForm(index, false, "form");
-                    navigate("/");
+                    refreshPage()
                 })
                 .catch((err) => {
                     console.log(err.response.data.errors);

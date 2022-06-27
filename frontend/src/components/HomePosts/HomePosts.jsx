@@ -8,7 +8,6 @@ import trashLogo from './trash.png';
 import locationLogo from './location.png';
 import { useNavigate } from 'react-router-dom';
 import './Homepost.css';
-import { Table } from 'react-bootstrap';
 
 const HomePosts = () => {
     const [posts, setPosts] = useState([]);
