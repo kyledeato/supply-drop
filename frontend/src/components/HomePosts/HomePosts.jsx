@@ -83,7 +83,7 @@ const HomePosts = () => {
                                 }}
                             >
                                 <div className='post-header'>
-                                    <p>Kyle Deato</p>
+                                    
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img

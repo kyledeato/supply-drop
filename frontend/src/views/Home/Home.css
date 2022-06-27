@@ -11,13 +11,14 @@
     width: 800px;
     border-radius: 15px;
     padding: 15px;
+    box-shadow: hsla(240, 12%, 71%, 0.2) 0px 7px 29px 0px;
 }
 
 .create-contain{
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
 }
 
 .create-box {
@@ -29,6 +30,7 @@
     color: #66686C;
     margin-left: 5px;
     font-size: 17px;
+    
 }
 
 .create-box:hover {
