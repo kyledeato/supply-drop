@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 .flex{
     display: flex;
 }
@@ -7,8 +9,9 @@
 }
 
 .nav{
-    background-color: #96ccec;
-    padding: 15px 25px;
+    background-color: #ffff;
+    padding: 10px 15px;
+    margin-bottom: 15px;
     justify-content: space-between;
     color: #0b343d;
     /* position: fixed;
@@ -29,7 +32,7 @@
 
 .nav a {
     font-size: 1.2em;
-    color: #0b343d;
+    color: #657f84;
     text-decoration: none;
     padding: 0 10px;
     border-left: 2px solid #7ea9c2;
@@ -38,6 +41,7 @@
 
 .nav a:hover{
     text-decoration: underline;
+    color: #D89859;
 }
 
 .no-border{
@@ -58,3 +62,29 @@
 .title-search{
     flex: 1;
 } 
+
+.title-logo {
+    color: #5690C3;
+    font-family: 'Bebas Neue';
+}
+
+.gold {
+    color: #D89859;
+}
+
+.supply-drop-logo {
+    height: 35px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+}
+
+.user {
+    font-size: 18px;
+    background-color: #F0F2F5;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.username {
+    font-style: italic;
+}

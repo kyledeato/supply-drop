@@ -25,7 +25,7 @@ const Home = () => {
     return (
         <div>
             <NavBar />
-            <h1>HOMEPAGE</h1>
+            
             {user && (
                 <div className='create-contain'>
                 <div className='create'>
