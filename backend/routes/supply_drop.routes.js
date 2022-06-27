@@ -26,7 +26,8 @@ module.exports = function (app) {
     app.put(
         '/api/post/:id',
         formdataParser.single('photo'),
+        authenticate,
         PostController.updatePost
     );
-    app.delete('/api/post/:id', PostController.deletePost);
+    app.delete('/api/post/:id', authenticate, PostController.deletePost);
 };

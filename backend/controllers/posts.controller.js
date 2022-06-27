@@ -37,20 +37,27 @@ module.exports = {
 
     updatePost: (req, res) => {
         try {
+            const userToken = res.locals.payload;
             const file = req.file;
             let post = req.body;
-            let query = { _id: req.params.id };
+            let query = { _id: req.params.id, postedBy: userToken.id };
 
             if (file) {
                 post['image'] = file.filename;
                 query['postType'] = 'offering';
-            } else {
-                throw new Error('Post must contain an image');
             }
 
             Post.findOneAndUpdate(query, post, {
                 new: true,
-            }).then((updatePost) => res.json(updatePost));
+            }).then((updatePost) => {
+                if (updatePost) {
+                    res.json(updatePost);
+                } else {
+                    res.status(404).json({
+                        message: 'Post not found or wrong postType',
+                    });
+                }
+            });
         } catch (err) {
             console.log(req.body);
             console.log(err);
@@ -59,7 +66,9 @@ module.exports = {
     },
 
     deletePost: (req, res) => {
-        Post.deleteOne({ _id: req.params.id })
+        const userToken = res.locals.payload;
+
+        Post.deleteOne({ _id: req.params.id, postedBy: userToken.id })
             .then((deleteConfirmation) => res.json(deleteConfirmation))
             .catch((err) => res.json(err));
     },
