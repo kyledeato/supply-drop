@@ -40,7 +40,7 @@ const HomePosts = (props) => {
 
                 if (id) {
                     data = data.filter(function (props) {
-                        return props.postedBy === id
+                        return props.postedBy._id === id
                     })
                 }
 
@@ -90,8 +90,11 @@ const HomePosts = (props) => {
                                     embiggenComponent(index, true, 'post');
                                 }}
                             >
-                                <div className='post-header'>
-                                    
+
+                                    <div className='post-header'>
+                                        {!id &&
+                                        <h6 className="name">{post.postedBy.firstName} {post.postedBy.lastName}</h6>
+                                        }
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img
@@ -127,7 +130,7 @@ const HomePosts = (props) => {
                                         )}
                                     </div>
                                 }
-                            {post.postedBy === user._id && (
+                            {post.postedBy._id === user._id && (
                                 <div className="edit-delete-container">
                                   
                                     <img

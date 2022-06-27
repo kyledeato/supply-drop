@@ -25,12 +25,14 @@ module.exports = {
 
     getPost: (req, res) => {
         Post.findOne({ _id: req.params.id })
+            .populate("postedBy", "-password")
             .then((post) => res.json(post))
             .catch((err) => res.json(err));
     },
 
     getAllPosts: (req, res) => {
         Post.find({})
+            .populate("postedBy", "-password")
             .then((post) => res.json(post))
             .catch((err) => res.json(err));
     },
