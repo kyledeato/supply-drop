@@ -42,7 +42,7 @@ function Post({
                     </div>
                     <div className='bottom'>
                         <form action="" className="email">
-                            <h1 className='title'>Send a Message</h1>
+                            <h1 className='title'>Send a Message {postedBy.firstName} {postedBy.lastName}</h1>
                             <label htmlFor="name">Name</label>
                             <input type="text" name="name"  required/>
                             <label htmlFor="name" className='padding'>Email</label>
