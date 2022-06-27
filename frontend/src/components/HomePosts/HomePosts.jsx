@@ -82,7 +82,7 @@ const HomePosts = () => {
                                     embiggenComponent(index, true, 'post');
                                 }}
                             >
-                                <div >
+                                <div className='post-header'>
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img
@@ -95,11 +95,11 @@ const HomePosts = () => {
                                             {post.location}
                                         </p>
                                     </div>
-                                </div>
-
                                 <div className="description">
                                     {post.description}
                                 </div>
+                                </div>
+
                             </div>
                             
                             <div className="display-flex-center">
