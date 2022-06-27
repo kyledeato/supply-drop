@@ -91,6 +91,7 @@ const HomePosts = (props) => {
                                 }}
                             >
                                 <div className='post-header'>
+                                    
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img
