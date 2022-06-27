@@ -106,6 +106,7 @@ const HomePosts = () => {
                                             post.image
                                         }
                                         alt={post.title}
+                                        sx = {{width: 150}}
                                     />
                                 ) : (
                                     <span>no image</span>
