@@ -35,7 +35,6 @@ const NavBar = () => {
         <div className='flex align-center'>
             <Link to="/" className='no-border' >Home</Link>
             <Link to="/allposts" >All Posts</Link>
-            <Link to="/create" >Create a Post</Link>
             {user && <Link to={`/account/${user._id}`}>Account</Link>}
             {user ? <div className="logged">
                 <button onClick={handleSubmit}>Logout</button>
