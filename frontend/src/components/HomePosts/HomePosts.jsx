@@ -102,34 +102,37 @@ const HomePosts = (props) => {
                                         <p className="location">
                                             {post.location}
                                         </p>
-                                    </div>
-                                <div className="description">
-                                    {post.description}
-                                </div>
+                                        </div>
+                                        {!id &&
+                                            <div className="description">
+                                                {post.description}
+                                            </div>
+                                        }
                                 </div>
 
                             </div>
-                            
-                            <div className="display-flex-center">
-                                {post.image ? (
-                                    <img
-                                        src={
-                                            'http://localhost:8000/img/' +
-                                            post.image
-                                        }
-                                        alt={post.title}
-                                    />
-                                ) : (
-                                    <span>no image</span>
-                                )}
-                            </div>
+                                {!id &&
+                                    <div className="display-flex-center">
+                                        {post.image ? (
+                                            <img
+                                                src={
+                                                    'http://localhost:8000/img/' +
+                                                    post.image
+                                                }
+                                                alt={post.title}
+                                            />
+                                        ) : (
+                                            <span>no image</span>
+                                        )}
+                                    </div>
+                                }
                             {post.postedBy === user._id && (
                                 <div className="edit-delete-container">
                                   
                                     <img
                                         src={editLogo}
                                         alt=""
-                                        srcset=""
+                                        srcSet=""
                                         className="edit-trash"
                                         onClick={() => {
                                             embiggenComponent(
@@ -142,14 +145,14 @@ const HomePosts = (props) => {
                                     <img
                                         src={trashLogo}
                                         alt=""
-                                        srcset=""
+                                        srcSet=""
                                         onClick={() => {
                                             handleDelete(post._id);
                                         }}
                                         className="edit-trash"
                                     />
                                 </div>
-                            )}
+                                )}
                             {post.bigEdit && (
                                 <PostForm
                                     embiggenForm={embiggenComponent}
