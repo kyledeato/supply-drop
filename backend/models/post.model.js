@@ -17,7 +17,7 @@ let PostSchema = new Schema({
     description: {
         type: String,
         required: [true, "Description is required"],
-        minlength: [20, "Description needs to be longer then 20 characters long"]
+        minlength: [10, "Description needs to be longer then 10 characters long"]
     },
 
     image: {
