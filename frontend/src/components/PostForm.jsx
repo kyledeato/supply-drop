@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './PostForm/PostForm.css'
+import './PostForm.css'
 
 const PostForm = (props) => {
     const { userID, postID, embiggenForm, index } = props;
@@ -114,7 +116,7 @@ const PostForm = (props) => {
                 </button>
                 <input />
                 {/* image container */}
-                <div>
+                <div className='post-form'>
                     <label className="" htmlFor="photo">
                         Add a photo
                     </label>

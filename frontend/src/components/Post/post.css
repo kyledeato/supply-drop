@@ -9,10 +9,61 @@
     top: 0;
     height: 100%;
     width: 100%;
+    background-color: rgba(216, 216, 215, 0.7);
 }
 
 .post,
 .post-form {
     display: inline-block;
-    outline: 2px red solid;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.post {
+    background-color: #FFFFFF;
+}
+
+.title {
+    font-weight: 800;
+}
+
+.location {
+    font-size: 13px;
+}
+
+.description {
+    font-size: 15px;
+    padding-top: 5px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+}
+
+.padding {
+    padding-top: 15px;
+}
+
+.x {
+    height: 16px;
+    cursor: pointer;
+}
+
+.post-head-container {
+    display: flex;
+    justify-content: space-between;
 }
