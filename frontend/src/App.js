@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './views/Login/Login';
 import Register from './views/Register/Register';
 import Home from './views/Home/Home';
-import Account from './views/Account/Account';
 import View from './views/View/View';
 import AllPost from './views/AllPost/AllPost';
 import Logout from './components/Logout/Logout';
@@ -24,7 +23,6 @@ function App() {
                     <Route path="/logout" element={<Logout />}></Route>
 
                     {/* IF YOU ARE DOING ACCOUNT PLZ CHANGE -> will be /account/id try to make id into the username if you can or not */}
-                    <Route path="/account" element={<Account />}></Route>
                     <Route path="/account/:id" element={<UserDetail />}></Route>
                     <Route
                         path="/account/edit/:id"
