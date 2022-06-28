@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from '@mui/material';
 
-function AutoCompleteLocations({ setLocation }) {
+function AutoCompleteLocations({ setLocation, ...props }) {
     const timeRef = useRef(0);
     const [results, setResults] = useState([]);
 
@@ -39,7 +39,12 @@ function AutoCompleteLocations({ setLocation }) {
             options={results}
             onInputChange={handleInputChange}
             renderInput={(params) => (
-                <TextField {...params} name="location" label="location" />
+                <TextField
+                    {...params}
+                    {...props}
+                    name="location"
+                    label="location"
+                />
             )}
         />
     );

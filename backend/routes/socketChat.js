@@ -7,7 +7,7 @@ module.exports = function (io) {
 
         if (params.userId && params.groupId) {
             socket.join(params.groupId);
-
+            console.log(params.userId, ' has joined ', params.groupId);
             socket.on('message', async (message) => {
                 const messageObject = {
                     user: params.userId,

@@ -7,7 +7,7 @@ import PostForm from '../../components/PostForm';
 import HomePosts from '../../components/HomePosts/HomePosts';
 import NavBar from '../../components/NavBar/NavBar';
 import logo from './logo.webp';
-
+import ChatList from '../../components/Chat/ChatList';
 
 const Home = () => {
     const [user, setUser] = useState();
@@ -62,7 +62,8 @@ const Home = () => {
             <div className="display-flex-center">
                 <HomePosts />
             </div>
-            
+
+            {user && <ChatList userId={user._id} />}
         </div>
     );
 };
