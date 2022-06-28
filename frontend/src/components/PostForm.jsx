@@ -12,6 +12,7 @@ import Input from '@mui/material';
 import { TextareaAutosize } from '@mui/material';
 import './PostForm/PostForm.css'
 import './PostForm.css'
+import x from './Post/x.png'
 
 
 const PostForm = (props) => {
@@ -135,14 +136,14 @@ const PostForm = (props) => {
                         name="photo"
                     />
                 </div>
-                {/* end post container */}
 
+                <br />
                 {/* post information container */}
                 <div>
                     <TextField
                         name="title"
-                        label="Post Title"
-                        className=""
+                        label="What are you offering/requesting?"
+                        className="request-offer-title"
                         defaultValue={postInfo.title || ''}
                     />
 
@@ -174,23 +175,36 @@ const PostForm = (props) => {
                         <label className="" htmlFor="desc">
                             Description of item(s):
                         </label>
-
+                            <br />
                         <TextareaAutosize
-                            style={{ marginTop: '15px', width: 250 }}
+                            minRows={3}
                             maxRows={6}
                             aria-label="maximum height"
                             defaultValue={postInfo.description || ''}
                             name="description"
-                            className=""
+                            className="description-location-box"
                         />
                     </div>
                     <div>
 
-                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" className="" />
+                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" className="description-location-box" />
                     </div>
-                    <Button style={{ marginTop: '10px' }} type="submit" variant="contained">Submit</Button>
                 </div>
                 {/* end post information container */}
+            {/* image container */}
+            <div className='post-form'>
+                <label className="" htmlFor="photo">
+                    Add a photo
+                </label>
+                <br />
+                <input
+                    type={'file'}
+                    accept=".png, .jpg, .jpeg"
+                    name="photo"
+                />
+            </div>
+            {/* end post container */}
+                    <Button style={{ marginTop: '10px' }} type="submit" variant="contained">Submit</Button>
             </form>
         </div>
     );
