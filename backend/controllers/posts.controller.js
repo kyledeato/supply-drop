@@ -7,14 +7,14 @@ module.exports = {
             const file = req.file;
             let post = req.body;
 
-            if (post.postType === 'offering') {
-                if (file) {
-                    post.image = file.filename;
-                } else {
-                    throw new Error('Post must contain an image');
-                }
+            if (file) {
+                post.image = file.filename;
             }
-            console.log(post);
+
+            if (post.postType === 'offering' && !file) {
+                throw new Error('Post must contain an image');
+            }
+
             const newpost = await Post.create(post);
             res.json(newpost);
         } catch (err) {
@@ -46,7 +46,6 @@ module.exports = {
 
             if (file) {
                 post['image'] = file.filename;
-                query['postType'] = 'offering';
             }
 
             Post.findOneAndUpdate(query, post, {
