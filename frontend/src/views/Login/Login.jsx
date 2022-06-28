@@ -1,13 +1,12 @@
 import React from "react";
+import NavBar from '../../components/NavBar/NavBar';
 
 import UserLogin from "../../components/LoginForm/UserLogin";
 
 const Login = (props) => {
     return (
         <div>
-            <header>
-                <h1>Login</h1>
-            </header>
+            <NavBar />
             <UserLogin/>
         </div>
     );

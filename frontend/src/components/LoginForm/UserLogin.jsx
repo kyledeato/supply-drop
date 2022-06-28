@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import './LoginForm.css'
 
 
 const UserLogin = (props) => {
@@ -47,21 +48,25 @@ const UserLogin = (props) => {
     };
 
     return (
-        <div>
+        <div className="user-form">
+            <h1 className='title-logo'>Login <span className="gold">Here</span></h1>
+            <h2>Haven't made an account yet? <Link to="/register">create one</Link>!</h2>
             <form onSubmit={handleSubmit}>
                 {renderErrorMessage("pass")}
-                <div className="mb-3" controlid="formBasicEmail">
-                    <label>Email </label>
-                    <input type="email" placeholder="Enter email" required name="email" onChange={(e) => setEmail(e.target.value)} />
+                <div className="flex justify-between align-center user-input-div" controlid="formBasicEmail">
+                    <label>Email: </label>
+                    <input type="email" required name="email" onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                <div className="mb-3" controlid="formBasicPassword">
-                    <label>Password </label>
-                    <input type="password" placeholder="Enter password" required name="password" onChange={(e) => setPassword(e.target.value)} />
+                <div className="flex justify-between align-center user-input-div" controlid="formBasicPassword">
+                    <label>Password: </label>
+                    <input type="password" required name="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
+                <h3>Having trouble logging in?</h3>
                 <div className="button-container">
-                    <input type="submit" />
+                    <input type="submit" value="Login" />
                 </div>
             </form>
+            <p>*Accounts aren't necessary to view posts*</p>
         </div>
     );
 }
