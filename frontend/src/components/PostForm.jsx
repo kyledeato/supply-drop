@@ -118,10 +118,23 @@ const PostForm = (props) => {
                 onSubmit={submitHandler}
                 method="post"
             >
-                <div className='x-container'>
-                <img src={x} alt="" srcset="" className='x-form' onClick={() => {
-                              embiggenForm(index, false, 'form');
-                          }}/>
+                <button
+                    onClick={() => {
+                        embiggenForm(index, false, 'form');
+                    }}
+                >
+                    [X]
+                </button>
+                {/* image container */}
+                <div className='post-form'>
+                    <label className="" htmlFor="photo">
+                        Add a photo
+                    </label>
+                    <input
+                        type={'file'}
+                        accept=".png, .jpg, .jpeg"
+                        name="photo"
+                    />
                 </div>
 
                 <br />
