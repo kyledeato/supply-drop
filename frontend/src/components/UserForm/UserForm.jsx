@@ -103,8 +103,16 @@ function UserForm({ mode }) {
 
     return (
         <div className='user-form'>
-            <h1 className='title-logo'>Register <span className='gold'>Here</span></h1>
-            <h2>Already have an account? <Link to="/login">Login here</Link>.</h2>
+            {mode==='register'?
+            <div>
+                <h1 className='title-logo'>Register <span className='gold'>Here</span></h1>
+                <h2>Already have an account? <Link to="/login">Login here</Link>.</h2>
+            </div>
+            :
+            <div>
+                <h1 className='title-logo'>Edit <span className='gold'>Account</span></h1>
+                <h2>All fields required.</h2>
+            </div>}
             <form onSubmit={handleSubmit}>
             {(mode === 'register' || mode === 'edit') && (
                 <>
@@ -159,12 +167,13 @@ function UserForm({ mode }) {
                 />
             </div>
             {renderErrorMessage('confirmPassword')}
-
-            <h3>Having trouble creating an account?</h3>
             <div className="button-container">
+                {mode==='register'?
                 <input type="submit" value="Register" />
+                :
+                <input type="submit" value="Submit" />}
             </div>
-            <p>*Accounts aren't necessary to view posts*</p>
+            {mode==='register'&&<p>*Accounts aren't necessary to view posts*</p>}
         </form>
         </div>
     );

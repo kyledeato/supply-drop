@@ -1,5 +1,6 @@
 .PostContainer{
-    margin-left: 550px;
+    display: flex;
+    justify-content: center;
 }
 .EditButton button{
     background-color:#eb831c ;
@@ -10,7 +11,6 @@
     display: flex;
     align-items: center;
     justify-content: right;
-    margin-right: 550px;
 }
 .EditText{
     justify-content: center;

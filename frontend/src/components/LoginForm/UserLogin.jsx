@@ -50,7 +50,7 @@ const UserLogin = (props) => {
     return (
         <div className="user-form">
             <h1 className='title-logo'>Login <span className="gold">Here</span></h1>
-            <h2>Haven't made an account yet? <Link to="/register">create one</Link>!</h2>
+            <h2>Haven't made an account yet? <Link to="/register">Create one</Link>!</h2>
             <form onSubmit={handleSubmit}>
                 {renderErrorMessage("pass")}
                 <div className="flex justify-between align-center user-input-div" controlid="formBasicEmail">

@@ -41,7 +41,7 @@ const NavBar = () => {
                 {user && <Link to={`/account/${user._id}`}>Account</Link>}
                 {user ? 
                 <div className="logged flex align-center">
-                    <a onClick={handleSubmit}>Logout</a>
+                    <Logout />
                     <p className='user'>
                         Hello, <span className='username'>{user.firstName} {user.lastName}</span>
                     </p>

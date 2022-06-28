@@ -12,7 +12,7 @@ const Logout = () => {
         axios.post("http://localhost:8000/api/user/logout", {}, {withCredentials: true})
             .then(res => {
                 console.log(res)
-                navigate('/')
+                navigate('/login')
                 console.log("you are logged out")
             })
             .catch(err => console.log(err))
