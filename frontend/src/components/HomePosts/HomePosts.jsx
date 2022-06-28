@@ -140,7 +140,6 @@ const HomePosts = (props) => {
                                             <span>no image</span>
                                         )}
                                     </div>
-                                }
                                 <div className="post-description">
                                 {!id &&
                                             <div className="description">
@@ -154,7 +153,7 @@ const HomePosts = (props) => {
                                   
                                     <img
                                         src={editLogo}
-                                        alt=""                query['postType'] = 'offering';
+                                        alt=""
                                         srcSet=""
                                         className="edit-trash"
                                         onClick={() => {
