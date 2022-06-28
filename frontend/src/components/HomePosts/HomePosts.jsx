@@ -80,7 +80,7 @@ const HomePosts = (props) => {
         <div>
             {
                 <div>
-                    {[...posts].reverse().map((post, index) => (
+                    {posts.map((post, index) => (
                         <React.Fragment key={post._id}>
                             <div className='post-contain'>
                             <div
@@ -123,10 +123,8 @@ const HomePosts = (props) => {
                                         </div>
                                 </div>
 
-                                <div>
-                                    <p>{post.postType}</p>
-                                </div>
                             </div>
+                                {!id &&
                                     <div className="display-flex-center">
                                         {post.image ? (
                                             <img
@@ -148,13 +146,12 @@ const HomePosts = (props) => {
                                             </div>
                                         }
                                 </div>
-
                             {post.postedBy._id === user._id && (
                                 <div className="edit-delete-container">
                                   
                                     <img
                                         src={editLogo}
-                                        alt=""                query['postType'] = 'offering';
+                                        alt=""
                                         srcSet=""
                                         className="edit-trash"
                                         onClick={() => {
