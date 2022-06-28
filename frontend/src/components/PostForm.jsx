@@ -118,13 +118,12 @@ const PostForm = (props) => {
                 onSubmit={submitHandler}
                 method="post"
             >
-                <button
-                    onClick={() => {
+
+                <div className='x-container'>
+                <img src={x} alt="" className='x-form' onClick={() => {
                         embiggenForm(index, false, 'form');
-                    }}
-                >
-                    [X]
-                </button>
+                    }}/>
+                </div>
                 {/* image container */}
                 <div className='post-form'>
                     <label className="" htmlFor="photo">
