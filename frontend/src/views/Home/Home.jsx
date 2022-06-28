@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 import PostForm from '../../components/PostForm';
 import HomePosts from '../../components/HomePosts/HomePosts';
 import NavBar from '../../components/NavBar/NavBar';
-import logo from './logo.webp'
+import logo from './logo.webp';
+import AutoCompleteLocations from '../../components/AutocompleteLocations';
 
 const Home = () => {
     const [user, setUser] = useState();
@@ -25,25 +26,30 @@ const Home = () => {
     return (
         <div>
             <NavBar />
-            
+
             {user && (
-                <div className='create-contain'>
-                <div className='create'>
-                    <img src={logo} alt="" srcset="" className="supply-drop"/>
-                    <a
-                        className='create-box'
-                        href="#newpost"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setBigForm(true);
-                        }}
-                    >
-                        What can you offer/request?
-                    </a>
+                <div className="create-contain">
+                    <div className="create">
+                        <img
+                            src={logo}
+                            alt=""
+                            srcset=""
+                            className="supply-drop"
+                        />
+                        <a
+                            className="create-box"
+                            href="#newpost"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setBigForm(true);
+                            }}
+                        >
+                            What can you offer/request?
+                        </a>
+                    </div>
                 </div>
-            </div>
             )}
-            
+
             {bigForm && (
                 <PostForm
                     embiggenForm={(index, active) => {
@@ -56,6 +62,7 @@ const Home = () => {
             <div className="display-flex-center">
                 <HomePosts />
             </div>
+            <AutoCompleteLocations />
         </div>
     );
 };

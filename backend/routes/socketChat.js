@@ -3,22 +3,21 @@ const { MessageGroup } = require('../models/messageGroup.model');
 
 module.exports = function (io) {
     io.on('connection', (socket) => {
-        console.log('connected', socket.handshake.query);
-        const query = socket.handshake.query;
+        const params = socket.handshake.query;
 
-        if (query.userId && query.groupId) {
-            socket.join(query.groupId);
+        if (params.userId && params.groupId) {
+            socket.join(params.groupId);
 
             socket.on('message', async (message) => {
                 const messageObject = {
-                    user: query.userId,
+                    user: params.userId,
                     message,
                 };
 
-                io.to(query.groupId).emit('message', messageObject);
+                io.to(params.groupId).emit('message', messageObject);
                 const newMsg = await Message.create(messageObject);
                 const updatedMsgGroup = await MessageGroup.findOneAndUpdate(
-                    query,
+                    params,
                     { $push: { messages: newMsg._id } },
                     {
                         new: true,
