@@ -37,7 +37,7 @@ const NavBar = () => {
             </div>
             <div className='flex align-center'>
                 <Link to="/" className='no-border' >Home</Link>
-                <Link to="/allposts" >All Posts</Link>
+                
                 {user && <Link to={`/account/${user._id}`}>Account</Link>}
                 {user ? 
                 <div className="logged flex align-center">
