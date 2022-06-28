@@ -44,7 +44,7 @@ function ChatList({ userId }) {
                         className='onechat'
                     >
                         <p>
-                            Coversation with:
+                            Conversation with:
                             {/* {groupMessage.users.map((user) => (
                                 <span>
                                     {user.firstName} {user.lastName},
