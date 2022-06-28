@@ -124,7 +124,7 @@ const PostForm = (props) => {
                         embiggenForm(index, false, 'form');
                     }}/>
                 </div>
-
+                {/* image container */}
 
                 <br />
                 {/* post information container */}

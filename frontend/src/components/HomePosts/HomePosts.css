@@ -28,6 +28,7 @@
 
 .title {
     font-weight: 800;
+    margin-bottom: 10px;
 }
 
 .location {
@@ -46,6 +47,7 @@
 .location-container {
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .edit-delete-container {
@@ -64,3 +66,22 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+.sub-header{
+    display: flex;
+    justify-content: space-between;
+}
+.post-type-spacing{
+    font-weight: bold;
+}
+.sub-head-post-type{
+    border-radius: 25px;
+    padding: 5px;
+    background-color: #e0e3e6;
+}
+.sub-header-name{
+    font-style: italic;
+    font-weight: 500;
+}
+/* .post-description{
+    text-align: center;
+} */
