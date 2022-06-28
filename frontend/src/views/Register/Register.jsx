@@ -1,12 +1,11 @@
 import React from "react";
+import NavBar from "../../components/NavBar/NavBar";
 import UserForm from "../../components/UserForm/UserForm";
 
 const Register = () => {
     return (
         <div>
-            <header>
-                <h1>Create User</h1>
-            </header>
+            <NavBar />
             <UserForm mode={"register"} />
         </div>
     );

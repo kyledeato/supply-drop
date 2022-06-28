@@ -20,9 +20,6 @@ const PostForm = (props) => {
     const [errors, setErrors] = useState('');
     const navigate = useNavigate();
 
-    const Input = styled('input')({
-        display: 'none',
-    });
     
     useEffect(() => {
         if (postID) {
@@ -127,7 +124,6 @@ const PostForm = (props) => {
                 >
                     [X]
                 </button>
-                <input />
                 {/* image container */}
                 <div className='post-form'>
                     <label className="" htmlFor="photo">
@@ -146,6 +142,7 @@ const PostForm = (props) => {
                     <TextField
                         name="title"
                         label="Post Title"
+                        className=""
                         defaultValue={postInfo.title || ''}
                     />
 
@@ -162,8 +159,9 @@ const PostForm = (props) => {
                                 <div className="flex">
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="female"
-                                        name="radio-buttons-group"
+                                        defaultValue="offering"
+                                        name="postType"
+                                        id="offering"
                                     >
                                         <FormControlLabel value="offering" control={<Radio />} label="Offering" />
                                         <FormControlLabel value="request" control={<Radio />} label="Request" />
@@ -188,7 +186,7 @@ const PostForm = (props) => {
                     </div>
                     <div>
 
-                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" />
+                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" className="" />
                     </div>
                     <Button style={{ marginTop: '10px' }} type="submit" variant="contained">Submit</Button>
                 </div>

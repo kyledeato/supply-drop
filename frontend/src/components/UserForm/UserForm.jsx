@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function UserForm({ mode }) {
     const navigate = useNavigate();
@@ -102,52 +102,71 @@ function UserForm({ mode }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className='user-form'>
+            <h1 className='title-logo'>Register <span className='gold'>Here</span></h1>
+            <h2>Already have an account? <Link to="/login">Login here</Link>.</h2>
+            <form onSubmit={handleSubmit}>
             {(mode === 'register' || mode === 'edit') && (
                 <>
-                    <FormField
-                        name={'firstName'}
-                        label={'First Name'}
-                        defaultValue={user.firstName || ''}
-                    />
+                    <div className='user-input-div'>
+                        <FormField
+                            name={'firstName'}
+                            label={'First Name:'}
+                            defaultValue={user.firstName || ''}
+                        />
+                        </div>
                     {renderErrorMessage('firstName')}
-                    <FormField
-                        name={'lastName'}
-                        label={'Last Name'}
-                        defaultValue={user.lastName || ''}
-                    />
+                    <div className='user-input-div'>
+                        <FormField
+                            name={'lastName'}
+                            label={'Last Name:'}
+                            defaultValue={user.lastName || ''}
+                        />
+                    </div>
                     {renderErrorMessage('lastName')}
-                    <FormField
-                        name={'username'}
-                        label={'Username'}
-                        defaultValue={user.username || ''}
-                    />
+                    <div className='user-input-div'>
+                        <FormField
+                            name={'username'}
+                            label={'Username:'}
+                            defaultValue={user.username || ''}
+                        />
+                    </div>
                     {renderErrorMessage('username')}
                 </>
             )}
-            <FormField
-                name={'email'}
-                label={'Email'}
-                defaultValue={user.email || ''}
-            />
+            <div className='user-input-div'>
+                <FormField
+                    name={'email'}
+                    label={'Email:'}
+                    defaultValue={user.email || ''}
+                />
+            </div>
             {renderErrorMessage('email')}
-            <FormField
-                name={'password'}
-                label={'Password'}
-                type={'password'}
-                defaultValue={user.password || ''}
-            />
+            <div className='user-input-div'>
+                <FormField
+                    name={'password'}
+                    label={'Password:'}
+                    type={'password'}
+                    defaultValue={user.password || ''}
+                />
+            </div>
             {renderErrorMessage('password')}
-
-            <FormField
-                name={'confirmPassword'}
-                label={'Password Confirmation'}
-                type={'password'}
-            />
+            <div className='user-input-div'>
+                <FormField
+                    name={'confirmPassword'}
+                    label={'Confirm Password:'}
+                    type={'password'}
+                />
+            </div>
             {renderErrorMessage('confirmPassword')}
 
-            <button type="submit">Submit</button>
+            <h3>Having trouble creating an account?</h3>
+            <div className="button-container">
+                <input type="submit" value="Register" />
+            </div>
+            <p>*Accounts aren't necessary to view posts*</p>
         </form>
+        </div>
     );
 }
 

@@ -1,5 +1,6 @@
 const UserController = require('../controllers/users.controller');
 const PostController = require('../controllers/posts.controller');
+const MessageController = require('../controllers/messages.controller');
 const { authenticate } = require('../configs/jwt.config');
 const multer = require('multer');
 const formdataParser = multer({ dest: 'uploads/' });
@@ -30,4 +31,22 @@ module.exports = function (app) {
         PostController.updatePost
     );
     app.delete('/api/post/:id', authenticate, PostController.deletePost);
+
+    //Message Routes
+    app.post(
+        '/api/message/new',
+        formdataParser.none(),
+        authenticate,
+        MessageController.createNewGroup
+    );
+    app.get(
+        '/api/message/self',
+        authenticate,
+        MessageController.getMessageGroups
+    );
+    app.get(
+        '/api/message/:groupId',
+        authenticate,
+        MessageController.getGroupMessages
+    );
 };
