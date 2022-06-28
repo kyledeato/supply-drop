@@ -13,7 +13,7 @@ import { TextareaAutosize } from '@mui/material';
 import './PostForm/PostForm.css'
 import './PostForm.css'
 import x from './Post/x.png'
-
+import AutoCompleteLocations from './AutocompleteLocations';
 
 const PostForm = (props) => {
     const { userID, postID, embiggenForm, index } = props;
@@ -175,8 +175,8 @@ const PostForm = (props) => {
                         />
                     </div>
                     <div>
-
-                        <TextField id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" className="description-location-box" />
+                    <AutoCompleteLocations id="standard-basic" name="location" defaultValue={postInfo.location || ''} label="Location" variant="standard" className="description-location-box"/>
+                       
                     </div>
                 </div>
                 {/* end post information container */}
