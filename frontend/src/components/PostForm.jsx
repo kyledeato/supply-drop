@@ -125,17 +125,6 @@ const PostForm = (props) => {
                     }}/>
                 </div>
                 {/* image container */}
-                <div className='post-form'>
-                    <label className="" htmlFor="photo">
-                        Add a photo
-                    </label>
-                    <input
-                        type={'file'}
-                        accept=".png, .jpg, .jpeg"
-                        name="photo"
-                    />
-                </div>
-
                 <br />
                 {/* post information container */}
                 <div>

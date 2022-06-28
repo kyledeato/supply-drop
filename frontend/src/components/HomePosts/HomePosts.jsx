@@ -32,7 +32,7 @@ const HomePosts = (props) => {
             .get('http://localhost:8000/api/post/')
             .then((res) => {
                 let data = res.data;
-
+                data.reverse()
                 data.forEach((element) => {
                     element.bigPost = false;
                     element.bigEdit = false;
@@ -92,9 +92,23 @@ const HomePosts = (props) => {
                             >
 
                                     <div className='post-header'>
+                                        <div className="sub-header">
+                                        <div className="sub-header-name">
                                         {!id &&
                                         <h6 className="name">{post.postedBy.firstName} {post.postedBy.lastName}</h6>
                                         }
+                                        </div>
+                                        <div className="sub-head-post-type">
+                                        {post.postType === "offering" ? 
+                                            <div>
+                                                <p className='post-type-spacing' style={{color:"#ee9c4a"}}>{post.postType}</p>
+                                            </div>
+                                            : 
+                                            <div>
+                                                <p className='post-type-spacing' style={{color:"#5690c3"}}>{post.postType}</p>
+                                            </div>}
+                                        </div>
+                                        </div>
                                     <h5 className="title">{post.title}</h5>
                                     <div className="location-container">
                                         <img
@@ -107,11 +121,6 @@ const HomePosts = (props) => {
                                             {post.location}
                                         </p>
                                         </div>
-                                        {!id &&
-                                            <div className="description">
-                                                {post.description}
-                                            </div>
-                                        }
                                 </div>
 
                             </div>
@@ -130,6 +139,13 @@ const HomePosts = (props) => {
                                         )}
                                     </div>
                                 }
+                                <div className="post-description">
+                                {!id &&
+                                            <div className="description">
+                                                {post.description}
+                                            </div>
+                                        }
+                                </div>
                             {post.postedBy._id === user._id && (
                                 <div className="edit-delete-container">
                                   
