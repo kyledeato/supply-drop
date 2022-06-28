@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import axios from 'axios';
+import xLogo from '../Post/x.png';
 
 function ChatBox({ groupId, userId, index, embiggenChat }) {
     const [messages, setMessages] = useState([]);
@@ -59,14 +60,16 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
     return (
         <div className="chatbox-container">
             <div className="chatbox">
-                <button
-                    onClick={() => {
-                        embiggenChat(index, false);
-                    }}
-                >
-                    [x]
-                </button>
-                <div>
+                    <img
+                            src={xLogo}
+                            alt=""
+                            srcSet=""
+                            onClick={() => {
+                                embiggenChat(index, false);
+                            }}
+                            className="x"
+                        />
+                <div className='messages'>
                     {messages.map((messageObject, index) => {
                         const user = users[messageObject.user];
                         const isSelf = user._id === userId;
@@ -91,14 +94,13 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
                                 className={isSelf ? 'self' : 'others'}
                             >
                                 <p>
-                                    {user.firstName} {user.lastName}
+                                    {user.firstName} {user.lastName}: {messageObject.message}
                                 </p>
-                                <p>{messageObject.message}</p>
                             </div>
                         );
                     })}
                 </div>
-                <form onSubmit={handleSend}>
+                <form className='chat-submit' onSubmit={handleSend}>
                     <input
                         id="textMessage"
                         type="text"
