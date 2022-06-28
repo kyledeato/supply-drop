@@ -42,6 +42,7 @@
 .nav a:hover{
     text-decoration: underline;
     color: #D89859;
+    transition: 0.3s;
 }
 
 .no-border{
