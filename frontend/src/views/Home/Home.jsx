@@ -7,7 +7,7 @@ import PostForm from '../../components/PostForm';
 import HomePosts from '../../components/HomePosts/HomePosts';
 import NavBar from '../../components/NavBar/NavBar';
 import logo from './logo.webp';
-import AutoCompleteLocations from '../../components/AutocompleteLocations';
+
 
 const Home = () => {
     const [user, setUser] = useState();
@@ -62,7 +62,7 @@ const Home = () => {
             <div className="display-flex-center">
                 <HomePosts />
             </div>
-            <AutoCompleteLocations />
+            
         </div>
     );
 };
