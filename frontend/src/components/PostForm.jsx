@@ -125,6 +125,7 @@ const PostForm = (props) => {
                     }}/>
                 </div>
                 {/* image container */}
+
                 <br />
                 {/* post information container */}
                 <div>
