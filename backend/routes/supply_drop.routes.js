@@ -1,6 +1,7 @@
 const UserController = require('../controllers/users.controller');
 const PostController = require('../controllers/posts.controller');
 const MessageController = require('../controllers/messages.controller');
+const PlaceController = require('../controllers/places.controller');
 const { authenticate } = require('../configs/jwt.config');
 const multer = require('multer');
 const formdataParser = multer({ dest: 'uploads/' });
@@ -48,5 +49,12 @@ module.exports = function (app) {
         '/api/message/:groupId',
         authenticate,
         MessageController.getGroupMessages
+    );
+
+    //Google Places API
+    app.get(
+        '/api/place/search',
+        authenticate,
+        PlaceController.getAutocompleteResult
     );
 };
