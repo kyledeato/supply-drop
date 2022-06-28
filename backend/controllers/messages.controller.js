@@ -57,11 +57,11 @@ async function getGroupMessages(req, res) {
 
 async function createNewGroup(req, res) {
     const userToken = res.locals.payload;
-    const groupName = req.body.groupName;
+    let groupName = req.body.groupName;
     let users = req.body.users;
-
+    console.log('start chat');
     try {
-        if (userToken && users && groupName) {
+        if (userToken && users) {
             // console.log(req.body);
             if (Array.isArray(users)) {
                 users.push(userToken.id);
@@ -70,6 +70,10 @@ async function createNewGroup(req, res) {
             }
         } else {
             throw new Error('bad-input');
+        }
+
+        if (!groupName) {
+            groupName = '----';
         }
 
         // await User.updateMany({})
