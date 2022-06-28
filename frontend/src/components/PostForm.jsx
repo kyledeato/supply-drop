@@ -124,7 +124,6 @@ const PostForm = (props) => {
                 >
                     [X]
                 </button>
-                <input />
                 {/* image container */}
                 <div className='post-form'>
                     <label className="" htmlFor="photo">
