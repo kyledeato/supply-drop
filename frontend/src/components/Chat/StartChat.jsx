@@ -12,7 +12,7 @@ function StartChat({ recipientId, groupName }) {
             data.append('groupName', groupName);
         }
         axios
-            .post('http://localhost:8000/api/message/new', {
+            .post('http://localhost:8000/api/message/new', data, {
                 withCredentials: true,
             })
             .then((res) => {
