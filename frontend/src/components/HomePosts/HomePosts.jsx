@@ -122,10 +122,6 @@ const HomePosts = (props) => {
                                         </p>
                                         </div>
                                 </div>
-
-                                <div>
-                                    <p>{post.postType}</p>
-                                </div>
                             </div>
                                     <div className="display-flex-center">
                                         {post.image ? (

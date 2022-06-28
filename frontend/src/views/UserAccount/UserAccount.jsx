@@ -35,16 +35,16 @@ const UserDetail = (props) => {
             <div className="AccountHeader">
                 <h3>{user.firstName}'s Posts</h3>
             </div>
-            <div className="AllEdit">
-                <div className="EditText">
-                <Link style={{textDecoration: 'none', color:'black'}} to={`/account/edit/${user._id}`}>Edit Account</Link>
-                </div>
-                <div className="EditButton">
-                    <Link to={`/account/edit/${user._id}`}><img src={settingsPhoto} alt="settings icon" /></Link>
-                </div>
-            </div>
             <div className="PostContainer">
                 <div>
+                    <div className="AllEdit">
+                        <div className="EditText">
+                            <Link style={{textDecoration: 'none', color:'black'}} to={`/account/edit/${user._id}`}>Edit Account</Link>
+                        </div>
+                        <div className="EditButton">
+                            <Link to={`/account/edit/${user._id}`}><img src={settingsPhoto} alt="settings icon" /></Link>
+                        </div>
+                    </div>
                     <HomePosts id={id} />
                 </div>
             </div>
