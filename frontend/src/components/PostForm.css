@@ -1,18 +1,24 @@
 .allcontain{     
-    background-color: rgba(216, 216, 215);
-    border-radius: 50px;     
-    border: solid gray 2px;     
+    background-color: rgba(216, 216, 215, 0.7);       
     position: fixed;     
-    top: 5%;     
-    left: 25%;     
+    top: 0;     
+    left: 0; 
+    right: 0;
+    bottom: 0;    
     transform: 'translate(-50%, -50%)';     
     padding: 50px;     
     z-index: 1000;     
-    height: 730px;     
-    width:800px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }  
-    
+
+.post-form {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
 .allcontain h1{     
     text-align: center;     
     font-size: 30px;     
@@ -27,4 +33,26 @@
     resize:none;     
     border-color: black;       
     height:150px 
+}
+
+.x-form{
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+}
+
+.x-container {
+    display: flex;
+    justify-content: end;
+}
+
+.request-offer-title{
+
+    width: 100%;
+}
+
+.description-location-box {
+    width: 100%;
 }
