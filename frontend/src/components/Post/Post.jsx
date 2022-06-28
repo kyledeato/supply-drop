@@ -20,11 +20,11 @@ function Post({
                 <div>
                     <div className='post-head-container'>
                         <h5 className='title'>{title}</h5>
-                        <img src={xLogo} alt="" srcset="" onClick={() => {
+                        <img src={xLogo} alt="" srcSet="" onClick={() => {
                             embiggenPost(index, false, 'post');
                         }} className='x'/>
                     </div>
-                    <img src={locationLogo} alt="" srcset=""className="locationImage"/><span className='location'>{location}</span>
+                    <img src={locationLogo} alt="" srcSet=""className="locationImage"/><span className='location'>{location}</span>
 
                         <p className='description'>{description}</p>
                 </div>
