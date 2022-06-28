@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChatBox from './ChatBox';
+import './Chat.css'
 
 function ChatList({ userId }) {
     const [groupMessages, setGroupMessages] = useState([]);
@@ -31,7 +32,8 @@ function ChatList({ userId }) {
     }
 
     return (
-        <div>
+        <div className='chatlist'>
+            <h3>Your Messages:</h3>
             {groupMessages.map((groupMessage, index) => (
                 <>
                     <div
@@ -39,15 +41,16 @@ function ChatList({ userId }) {
                         onClick={() => {
                             embiggen(index, true);
                         }}
+                        className='onechat'
                     >
-                        <h4>{groupMessage.name}</h4>
                         <p>
                             Coversation with:
-                            {groupMessage.users.map((user) => (
+                            {/* {groupMessage.users.map((user) => (
                                 <span>
                                     {user.firstName} {user.lastName},
                                 </span>
-                            ))}
+                            ))} */}
+                            {groupMessage.users[1].firstName} {groupMessage.users[1].lastName}
                         </p>
                     </div>
                     {groupMessage.bigChat && (
