@@ -52,9 +52,10 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
 
     function handleSend(e) {
         e.preventDefault();
-        const textMessage = document.getElementById('textMessage').value;
+        const id = 'textMessage-' + groupId;
+        const textMessage = document.getElementById(id).value;
         socketRef.current.send(textMessage);
-        document.getElementById('textMessage').value = '';
+        document.getElementById(id).value = '';
     }
 
     return (
@@ -79,7 +80,7 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
                                 className={isSelf ? 'self' : 'others'}
                             >
                                 <p>
-                                    {user.firstName} {user.lastName}
+                                    {user.firstName} {user.lastName}: {messageObject.message}
                                 </p>
                                 <p>{messageObject.message}</p>
                             </div>
@@ -102,7 +103,7 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
                 </div>
                 <form className='chat-submit' onSubmit={handleSend}>
                     <input
-                        id="textMessage"
+                        id={'textMessage-' + groupId}
                         type="text"
                         autoComplete="off"
                         name="textMessage"
