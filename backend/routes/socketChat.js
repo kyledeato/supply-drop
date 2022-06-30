@@ -17,7 +17,7 @@ module.exports = function (io) {
                 io.to(params.groupId).emit('message', messageObject);
                 const newMsg = await Message.create(messageObject);
                 const updatedMsgGroup = await MessageGroup.findOneAndUpdate(
-                    params,
+                    { _id: params.groupId },
                     { $push: { messages: newMsg._id } },
                     {
                         new: true,
