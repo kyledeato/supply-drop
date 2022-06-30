@@ -30,6 +30,11 @@ function ChatList({ userId }) {
         tempGroupMessages[index].bigChat = active;
         setGroupMessages(tempGroupMessages);
     }
+    
+    function getOtherUser(groupMessage) {
+        const user = groupMessage.users.find((user) => userId !== user._id);
+        return user.firstName + ' ' + user.lastName;
+    }
 
     return (
         <div className='chatlist'>
@@ -44,13 +49,7 @@ function ChatList({ userId }) {
                         className='onechat'
                     >
                         <p>
-                            Conversation with:
-                            {/* {groupMessage.users.map((user) => (
-                                <span>
-                                    {user.firstName} {user.lastName},
-                                </span>
-                            ))} */}
-                            {groupMessage.users[1].firstName} {groupMessage.users[1].lastName}
+                            Conversation with: {getOtherUser(groupMessage)}
                         </p>
                     </div>
                     {groupMessage.bigChat && (
