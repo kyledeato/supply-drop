@@ -9,6 +9,7 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
     const [socketMessages, setSocketMessages] = useState([]);
     const [groupMessage, setGroupMessage] = useState({});
     const [users, setUsers] = useState({});
+    const [latestMessage, setLatestMessage] = useState({});
     const socketRef = useRef(
         io('ws://localhost:8000', {
             reconnectionDelayMax: 10000,
@@ -34,7 +35,7 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
                 });
                 setUsers(tempUsers);
                 socketRef.current.connect();
-                socketRef.current.on('message', appendMessage);
+                socketRef.current.on('message', setLatestMessage);
             })
             .catch((err) => {
                 console.log(err);
@@ -44,11 +45,11 @@ function ChatBox({ groupId, userId, index, embiggenChat }) {
         };
     }, []);
 
-    function appendMessage(messageObject) {
-        let tempMessages = [...socketMessages, messageObject];
+    useEffect(() => {
+        let tempMessages = [...socketMessages, latestMessage];
 
         setSocketMessages(tempMessages);
-    }
+    }, [latestMessage]);
 
     function handleSend(e) {
         e.preventDefault();
