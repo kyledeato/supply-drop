@@ -15,6 +15,7 @@
 
 ## Table of Contents
 * [General Info](#general-information)
+* [Screenshots](#screenshots)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Room for Improvement](#room-for-improvement)
@@ -28,6 +29,11 @@
 - Can message the user about the request/offer.
 - Be able to see the location of the post.
 
+## Screenshots
+<img src="https://res.cloudinary.com/dzi3h2qea/image/upload/v1658527981/Screen_Shot_2022-07-22_at_9.18.51_AM_pz6qs5.png"/>
+<img src="https://res.cloudinary.com/dzi3h2qea/image/upload/v1658527981/Screen_Shot_2022-07-22_at_2.57.43_PM_mo7lms.png">
+<img src="https://res.cloudinary.com/dzi3h2qea/image/upload/v1658527981/Screen_Shot_2022-07-22_at_2.57.09_PM_k8h6zz.png">
+<img src="https://res.cloudinary.com/dzi3h2qea/image/upload/v1658527981/Screen_Shot_2022-07-22_at_2.57.23_PM_jrioik.png">
 
 ## Technologies Used
 - ReactJS
